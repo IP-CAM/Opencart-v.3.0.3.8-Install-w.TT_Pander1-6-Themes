@@ -1,0 +1,112 @@
+﻿{{ header }} {{ column_left }}
+<div id="content"><link type="text/css" href="view/stylesheet/stylesheet2.css" rel="stylesheet" media="screen" />
+<div class="breadcrumb">
+  {% for breadcrumb in breadcrumbs %}
+  {{ breadcrumb.separator }} <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }} </a>
+   {% endfor %}
+</div>
+{% if error_warning %}
+<div class="warning">{{ error_warning }} </div>
+{% endif %}
+{% if success %}
+  <div class="success">{{ success }} </div>
+  {% endif %}
+<div class="box">
+  <div class="heading">
+    <h1><img src="view/image/module.png" alt="" /> {{ heading_title }} </h1>
+    <div class="buttons"><a onclick="$('#form').submit();" class="button">{{ button_save }} </a><a onclick="location = '{{ cancel }}';" class="button">{{ button_cancel }} </a></div>
+  </div>
+  <div class="content">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+
+      <table id="module" class="list">
+        <thead>
+          <tr>
+            <td class="left">Özellik</td>
+            <td class="left">Durum</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="left">Akıllı SEO Etiketleri (Örnek. opencartuzman.com/<b>tags/adidas</b>)</td>
+           	<td class="left">
+				{% if extendedseo.seotags %}
+                <input type="checkbox" name="extendedseo[seotags]" value="1" checked="checked" />
+                {% else %}
+                <input type="checkbox" name="extendedseo[seotags]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr>
+            <td class="left">Ürün için SEO Plus (Ürün açıklamasının başlığına ürün adını h2 etiketi olarak ekler.)</a></td>
+           	<td class="left">
+				{% if extendedseo.productseo %}
+                <input type="checkbox" name="extendedseo[productseo]" value="1" checked="checked" />
+                {% else %}
+                <input type="checkbox" name="extendedseo[productseo]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr>
+            <td class="left">Ürün title etiketinin başına kategori adını Ekle</a></td>
+           	<td class="left">
+				{% if extendedseo.categoryintitle %}
+                <input type="checkbox" name="extendedseo[categoryintitle]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="extendedseo[categoryintitle]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr>
+            <td class="left">Mağaza ismini mağaza linkine dönüştür.</a></td>
+           	<td class="left">
+				{% if extendedseo.link %}
+                <input type="checkbox" name="extendedseo[link]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="extendedseo[link]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		   <tr style="display:none;">
+            <td class="left">Mategori ve marka sayfalarında Url in sonuna / ekle</a></td>
+           	<td class="left">
+				{% if extendedseo.slash %}
+                <input type="checkbox" name="extendedseo[slash]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="extendedseo[slash]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr>
+            <td class="left">Robots etiketi kullan</a></td>
+           	<td class="left">
+				{% if extendedseo.robots %}
+                <input type="checkbox" name="extendedseo[robots]" value="1" checked="checked" />
+                {% else %}
+                <input type="checkbox" name="extendedseo[robots]" value="1" /> {% endif %}
+                 </td>
+          </tr>
+		  <tr style="display:none;">
+            <td class="left">Meta başlıkları max 60 karakter yap.</a></td>
+           	<td class="left">
+				{% if extendedseo.trim_titles %}
+                <input type="checkbox" name="extendedseo[trim_titles]" value="1" checked="checked" />
+                {% else %}
+                <input type="checkbox" name="extendedseo[trim_titles]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr style="display:none;">
+            <td class="left">Meta açıklamaları max 160 karakter yap.</a></td>
+           	<td class="left">
+				{% if extendedseo.trim_descriptions %}
+                <input type="checkbox" name="extendedseo[trim_descriptions]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="extendedseo[trim_descriptions]" value="1" />{% endif %}
+                 </td>
+          </tr>
+
+        </tbody>
+
+
+      </table>
+    </form>
+  </div>
+</div>
+
+{{ footer }}

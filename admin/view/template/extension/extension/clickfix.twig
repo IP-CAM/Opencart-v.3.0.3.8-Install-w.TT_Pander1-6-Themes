@@ -1,0 +1,194 @@
+{{ header }} {{ column_left }}
+{% spaceless %}
+<div id="content">
+<link type="text/css" href="view/stylesheet/stylesheet2.css" rel="stylesheet" media="screen" />
+  <div class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    {{ breadcrumb.separator }} <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }} </a>
+    {% endfor %}
+  </div>
+  {% if error_warning %}
+  <div class="warning">{{ error_warning }} </div>
+  {% endif %}
+  {% if success %}
+  <div class="success">{{ success }} </div>
+  {% endif %}
+  <div class="box">
+    <div class="heading">
+      <h1><img src="view/image/review.png" alt="" /> {{ heading_title }} </h1>
+
+		<div class="buttons"><div id="containerx" style="margin: 1px;width: 200px;height: 21px;position: relative;"></div></div>
+	</div>
+    <div class="content">
+	<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+		   <table class="list">
+            <thead>
+              <tr>
+                <td class="left" width="200">SEO Özellik</td>
+				<td class="left">Durum</td>
+				<td class="right" width="220">İşlem</td>
+              </tr>
+            </thead>
+
+			<tbody>
+              <tr>
+                <td class="left"><b>SEO Linkler</b></td>
+                <td class="left">
+
+				{{ aboutseourls }} </td>
+                <td class="right">
+					{% if fixseourls %}
+					<a onclick="location = '{{ fixseourls }}'" class="button">SEO URL'lerini Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam</a>
+					 {% endif %}
+				</td>
+              </tr>
+              <tr>
+                <td class="left"><b>Meta Açıklaması</b></td>
+                <td class="left">
+
+				{{ aboutmetadescription }} </td>
+                <td class="right">
+					{% if fixmetadescription %}
+					<a onclick="location = '{{ fixmetadescription }}'" class="button">Meta Kelimeleri Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+              <tr>
+                <td class="left"><b>Meta Kelimeleri</b></td>
+                <td class="left">
+
+				{{ aboutmetakeyword }} </td>
+                <td class="right">
+					{% if fixmetakeyword %}
+					<a onclick="location = '{{ fixmetakeyword }}'" class="button">Meta Kelimeleri Düzelt</a>
+					{% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+              <tr>
+                <td class="left"><b>Meta Başlığı</b></td>
+                <td class="left">
+
+				{{ aboutmetatitle }} </td>
+                <td class="right">
+					{% if fixmetatitle %}
+					<a onclick="location = '{{ fixmetatitle }}'" class="button">Meta Başlıkları Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+              <tr>
+                <td class="left"><b>Canonical Linkler</b></td>
+                <td class="left">
+
+				{{ aboutcanonicals }} </td>
+                <td class="right">
+					{% if fixcanonicals %}
+					<a onclick="location = '{{ fixcanonicals }}'" class="button">Canonical Linkleri Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+            <tr>
+                <td class="left"><b>Çok Dil SEO</b></td>
+                <td class="left">
+
+				{{ aboutmlseo }} </td>
+                <td class="right">
+					{% if fixmlseo %}
+					<a onclick="location = '{{ fixmlseo }}'" class="button">Çok Dil SEO Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+            <tr>
+                <td class="left"><b>Rich Snippets & Sosyal Medya SEO</b></td>
+                <td class="left">
+
+				{{ aboutrichsnippets }} </td>
+                <td class="right">
+					{% if fixrichsnippets %}
+					<a onclick="location = '{{ fixrichsnippets }}'" class="button">Rich Snippets & Sosyal Medya SEO Düzelt</a>
+					{% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+            <tr>
+                <td class="left"><b>SEO Sayfalama</b></td>
+                <td class="left">
+
+				{{ aboutseopagination }} </td>
+                <td class="right">
+					{% if fixseopagination %}
+					<a onclick="location = '{{ fixseopagination }}'" class="button">SEO Sayfalama Düzelt</a>
+					 {% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+            <tr>
+                <td class="left"><b>Gelişmiş SEO Ayarları</b></td>
+                <td class="left">
+
+				{{ aboutextendedseo }} </td>
+                <td class="right">
+					{% if fixextendedseo %}
+					<a onclick="location = '{{ fixextendedseo }}'" class="button">Gelişmiş SEO Ayarlarını Düzelt</a>
+					{% else %}
+					<a class="button" style="background:green">Tamam </a>
+					 {% endif %}
+				</td>
+              </tr>
+            </tbody>
+
+
+          </table>
+	</form>
+	</div>
+   </div>
+</div>
+<script src="view/javascript/progressbar.js"></script>
+<script type="text/javascript">
+var bar = new ProgressBar.Line(containerx, {
+  strokeWidth: 10,
+  easing: 'easeInOut',
+  duration: 3000,
+  color: '#FFEA82',
+  trailColor: '#bbb',
+  trailWidth: 10,
+  svgStyle: {width: '100%', height: '100%'},
+  text: {
+    style: {
+      // Text color.
+      // Default: same as stroke color (options.color)
+      color: '#555555',
+
+      position: 'absolute',
+      right: '50px',
+      top: '0',
+      padding: 0,
+      margin: 10,
+      transform: null
+    },
+    autoStyleContainer: false
+  },
+  from: {color: '#00EA82'},
+  to: {color: '#006A5A'},
+  step: (state, bar) => {
+    bar.setText('<b>SEO Uyumluluk: ' + Math.floor(bar.value() * 100) + ' %</b>');
+  }
+});
+
+bar.animate({{ seometer }} );
+</script>
+{% endspaceless %}
+{{ footer }}

@@ -1,0 +1,5 @@
+2022-03-09 13:52:34 - PHP Warning:  Use of undefined constant DB_DRIVER - assumed 'DB_DRIVER' (this will throw an Error in a future version of PHP) in C:\xampp\htdocs\kayra-rug\install\controller\startup\database.php on line 19
+2022-03-09 13:52:34 - PHP Warning:  Use of undefined constant DB_HOSTNAME - assumed 'DB_HOSTNAME' (this will throw an Error in a future version of PHP) in C:\xampp\htdocs\kayra-rug\install\controller\startup\database.php on line 19
+2022-03-09 13:52:34 - PHP Warning:  Use of undefined constant DB_USERNAME - assumed 'DB_USERNAME' (this will throw an Error in a future version of PHP) in C:\xampp\htdocs\kayra-rug\install\controller\startup\database.php on line 19
+2022-03-09 13:52:34 - PHP Warning:  Use of undefined constant DB_PASSWORD - assumed 'DB_PASSWORD' (this will throw an Error in a future version of PHP) in C:\xampp\htdocs\kayra-rug\install\controller\startup\database.php on line 19
+2022-03-09 13:52:34 - PHP Warning:  Use of undefined constant DB_DATABASE - assumed 'DB_DATABASE' (this will throw an Error in a future version of PHP) in C:\xampp\htdocs\kayra-rug\install\controller\startup\database.php on line 19

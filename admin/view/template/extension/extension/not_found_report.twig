@@ -1,0 +1,53 @@
+{{ header }} {{ column_left }} 
+<div id="content"><link type="text/css" href="view/stylesheet/stylesheet2.css" rel="stylesheet" media="screen" />
+<div class="breadcrumb">
+  {% for breadcrumb in breadcrumbs %} 
+  {{ breadcrumb.separator }} <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }} </a>
+    {% endfor %}
+</div>
+{% if error_warning %} 
+<div class="warning">{{ error_warning }} </div>
+{% endif %} 
+{% if success %} 
+<div class="success">{{ success }} </div>
+{% endif %} 
+<div class="box">
+  <div class="heading">
+    <h1><img src="view/image/module.png" alt="" /> {{ heading_title }} </h1>
+	<div class="buttons"><a onclick="location = '{{ redirect }}';" class="button">Yönlendirme Ekle</a>
+	<a onclick="location.href='{{ clearlog }}';" class="button"  class="btn btn-danger">404 Hata Raporlarını Sil</a></div>    
+  </div>
+  <div class="content">
+
+	 <table class="list">
+          <thead>
+            <tr>              
+              <td class="left">Sayfa Bulunamadı Lİnki</td>
+              <td class="left">Son Ziyaret</td>              
+            </tr>
+          </thead>
+          <tbody>
+            
+            {% if pages %} 
+            {% for page in pages %} 
+            <tr>              
+              <td class="left">{{ page.link }} </td>
+              <td class="left">{{ page.date }} </td>                            			  
+            </tr>
+			 {% endfor %}
+					
+             {% else %}   
+            <tr>
+              <td class="center" colspan="8">{{ text_no_results }} </td>
+            </tr>
+            {% endif %} 	 
+          </tbody>
+		</table>
+		 <div class="pagination">{{ pagination }} </div>
+	</div>
+
+	<span style="color:red" class="help">*</span>	
+  </div>
+</div>
+
+{{ footer }} 

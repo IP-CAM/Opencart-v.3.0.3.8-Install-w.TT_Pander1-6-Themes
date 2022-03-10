@@ -1,0 +1,157 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+            <button type="submit" form="form-testimonials" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+            <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+  
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-testimonials" class="form-horizontal">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab-basic" data-toggle="tab">{{ tab_basic }}</a></li>
+                        <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade" id="tab-seo">
+                            <ul class="nav nav-tabs" id="language">
+                                {% for language in languages %}
+                                    <li class="active"><a href="#language{{ language.language_id }}" data-toggle="tab">
+                                    <!-- code updated -->
+                                    <i class="fa fa-flag-checkered" aria-hidden="true"></i> {{ language.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="tab-content">
+                                {% for language in languages %}
+                                    <div class="tab-pane active in" id="language{{ language.language_id }}">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="input-meta-title{{ language.language_id }}">{{ entry_meta_title }}</label>
+                                            <div class="col-sm-9">
+                                              <!-- code updated -->
+                                              <input type="text" name="conf_meta_title" value="{{ modules.conf_meta_title is defined ? modules.conf_meta_title: '' }}" placeholder="{{ entry_meta_title }}" id="input-meta-title" class="form-control" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="input-meta-keywords{{ language.language_id }}">{{ entry_meta_keywords }}</label>
+                                            <div class="col-sm-9">
+                                                <!-- code updated -->
+                                                <textarea rows="7" class="form-control" placeholder="{{ entry_meta_keywords }}" name="conf_meta_keywords">{{ modules.conf_meta_keywords is defined ? modules.conf_meta_keywords: '' }}</textarea>
+                                                <p>Give comma (,) seperated keywords</p>      
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="input-meta-description{{ language.language_id }}">{{ entry_meta_desc }}</label>
+                                            <div class="col-sm-9">
+                                                <!-- code updated -->
+                                                <textarea rows="7" class="form-control" placeholder="{{ entry_meta_desc }}" name="conf_meta_desc">{{ modules.conf_meta_desc is defined ? modules.conf_meta_desc: '' }}</textarea>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane active in" id="tab-basic">
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-guest">{{ entry_allow_guest }}</label>
+                                <div class="col-sm-9">
+                                    <select name="conf_allow_guest" id="input-guest" class="form-control">
+                                        {% if modules.conf_allow_guest is defined and modules.conf_allow_guest == 1 %}
+                          
+                                            <option value="1" selected="selected">{{ text_yes }}</option>
+                                            <option value="0">{{ text_no }}</option>
+                                          
+                                        {% else %}
+                                          
+                                            <option value="0">{{ text_no }}</option>
+                                            <option value="1">{{ text_yes }}</option>
+                                          
+                                        {% endif %}
+
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-limit">{{ entry_testimonials_limit }}</label>
+                                <div class="col-sm-9">
+                                  <input type="text" name="config_testimonials_limit" value="{{ modules.config_testimonials_limit is defined ?  modules.config_testimonials_limit : '' }}" placeholder="{{ entry_testimonials_limit }}" id="input-limit" class="form-control" />
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-approval">{{ entry_admin_approval }}</label>
+                                <div class="col-sm-9">
+                                    <select name="conf_admin_approval" id="input-approval" class="form-control">
+                                        {% if modules.conf_admin_approval is defined and modules.conf_admin_approval == 1 %}
+                          
+                                            <option value="1" selected="selected">{{ text_no }}</option>
+                                            <option value="0">{{ text_yes }}</option>
+                                          
+                                        {% else %}
+                                          
+                                            <option value="0">{{ text_yes }}</option>
+                                            <option value="1">{{ text_no }}</option>
+                                          
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- // new updates (17/4) -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-approval">
+                                <span data-toggle="tooltip" title="{{ entry_admin_frontend_approval_tooltip_title }}">{{ entry_admin_frontend_approval }}</span></label>
+                                <div class="col-sm-9">
+                                    <select name="conf_admin_frontend_approval" id="input-approval" class="form-control">
+                                        {% if modules.conf_admin_frontend_approval is defined and modules.conf_admin_frontend_approval == 1 %}
+                          
+                                            <option value="1" selected="selected">{{ text_yes }}</option>
+                                            <option value="0">{{ text_no }}</option>
+                                          
+                                        {% else %}
+                                          
+                                            <option value="0">{{ text_no }}</option>
+                                            <option value="1">{{ text_yes }}</option>
+                                          
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<script type="text/javascript"><!--
+('#language a:first').tab('show');
+//--></script>
+
+{{ footer }}
+
+
+
