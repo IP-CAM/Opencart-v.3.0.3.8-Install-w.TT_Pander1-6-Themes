@@ -1,0 +1,3220 @@
+<modification>
+	<name>Opencart SEO Pack PRO</name>
+	<version>3.x</version>
+	<author>OpencartUzman</author>
+
+	<file path="admin/controller/common/column_left.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[$moduller = array();]]></search>
+			<add position="after"><![CDATA[
+
+			$seo = array();
+
+			if ($this->user->hasPermission('access', 'extension/extension/seopack')) {
+				$seo[] = array(
+					'name'     => 'SEO Yönetimi',
+					'href'     => $this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+
+			if ($this->user->hasPermission('access', 'extension/extension/seoimages')) {
+				$seo[] = array(
+					'name'	   => 'Resimler İçin SEO',
+					'href'     => $this->url->link('extension/extension/seoimages', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/clickfix')) {
+				$seo[] = array(
+					'name'	   => 'SEO Tıkla Düzenle',
+					'href'     => $this->url->link('extension/extension/clickfix', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/autolinks')) {
+				$seo[] = array(
+					'name'	   => 'Otomatik Linkler',
+					'href'     => $this->url->link('extension/extension/autolinks', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/canonicals')) {
+				$seo[] = array(
+					'name'	   => 'Canonical Linkler',
+					'href'     => $this->url->link('extension/extension/canonicals', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/mlseo')) {
+				$seo[] = array(
+					'name'	   => 'Çoklu Dil SEO',
+					'href'     => $this->url->link('extension/extension/mlseo', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/richsnippets')) {
+				$seo[] = array(
+					'name'	   => 'Rich Snippets & Sosyal Medya SEO',
+					'href'     => $this->url->link('extension/extension/richsnippets', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/seopagination')) {
+				$seo[] = array(
+					'name'	   => 'SEO Sayfalama',
+					'href'     => $this->url->link('extension/extension/seopagination', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/redirect')) {
+				$seo[] = array(
+					'name'	   => 'SEO Yönlendirici',
+					'href'     => $this->url->link('extension/extension/redirect', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/seoreplacer')) {
+				$seo[] = array(
+					'name'	   => 'SEO Bul & Değiştir Aracı',
+					'href'     => $this->url->link('extension/extension/seoreplacer', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/extendedseo')) {
+				$seo[] = array(
+					'name'	   => 'Gelişmiş SEO',
+					'href'     => $this->url->link('extension/extension/extendedseo', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/seoeditor')) {
+				$seo[] = array(
+					'name'	   => 'SEO Editor',
+					'href'     => $this->url->link('extension/extension/seoeditor', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			$seoreports = array();
+			if ($this->user->hasPermission('access', 'extension/extension/bot_report')) {
+				$seoreports[] = array(
+					'name'	   => 'Bot Tarama Raporları',
+					'href'     => $this->url->link('extension/extension/bot_report', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/not_found_report')) {
+				$seoreports[] = array(
+					'name'	   => '404 (Not found) Raporları',
+					'href'     => $this->url->link('extension/extension/not_found_report', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/seoreport')) {
+				$seoreports[] = array(
+					'name'	   => 'SEO Veri Raporları',
+					'href'     => $this->url->link('extension/extension/seoreport', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($seoreports) {
+				$seo[] = array(
+					'name'	   => 'SEO Raporları',
+					'href'     => '',
+					'children' => $seoreports
+				);
+			}
+
+			if ($seo) {
+				$moduller[] = array(
+					'name'	   => 'SEO',
+					'href'     => '',
+					'children' => $seo
+				);
+			}
+
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/common/header.php">
+		<operation error="skip">
+			<search><![CDATA[$data['title']]]></search>
+			<add position="before"><![CDATA[
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "manufacturer_description` (
+	`manufacturer_id` int(11) NOT NULL,
+	`language_id` int(11) NOT NULL,
+	`description` text COLLATE utf8_bin NOT NULL,
+	`meta_description` varchar(255) COLLATE utf8_bin NOT NULL,
+	`meta_keyword` varchar(255) COLLATE utf8_bin NOT NULL,
+	`custom_title` varchar(255) COLLATE utf8_bin DEFAULT '',
+	PRIMARY KEY (`manufacturer_id`,`language_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "product_description_seo` (
+  `product_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `custom_imgtitle` varchar(255) NULL DEFAULT '',
+  `custom_alt` varchar(255) NULL DEFAULT '',
+  `custom_h1` varchar(255) NULL DEFAULT '',
+  `custom_h2` varchar(255) NULL DEFAULT '',
+  PRIMARY KEY (`product_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "category_description_seo` (
+  `category_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `custom_imgtitle` varchar(255) NULL DEFAULT '',
+  `custom_alt` varchar(255) NULL DEFAULT '',
+  `custom_h1` varchar(255) NULL DEFAULT '',
+  `custom_h2` varchar(255) NULL DEFAULT '',
+  PRIMARY KEY (`category_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "information_description_seo` (
+  `information_id` int(11) NOT NULL,
+  `language_id` int(11) NOT NULL,
+  `custom_imgtitle` varchar(255) NULL DEFAULT '',
+  `custom_alt` varchar(255) NULL DEFAULT '',
+  `custom_h1` varchar(255) NULL DEFAULT '',
+  `custom_h2` varchar(255) NULL DEFAULT '',
+  PRIMARY KEY (`information_id`,`language_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "autoredirect` (
+	`link` varchar(321) NOT NULL,
+	`fixedlink` varchar(321) NOT NULL,
+	`date` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "404s_report` (
+	`link` varchar(321) NOT NULL,
+	`date` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+
+$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "bots_report` (
+	`link` varchar(321) NOT NULL,
+	`bot` varchar(321) NOT NULL,
+	`ip` varchar(321) NOT NULL,
+	`date` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+/*
+$titles = $this->config->get('config_meta_title');
+$meta_descriptions = $this->config->get('config_meta_description');
+$meta_keywords = $this->config->get('config_meta_keyword');
+if (!isset($titles[$this->config->get('config_language_id')])) {
+			$this->load->model('setting/setting');
+			$titles = array();
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+					$language_id = $language['language_id'];
+					$titles[$language_id] = $this->config->get('config_meta_title');
+				}
+			$this->model_setting_setting->editSetting('config_meta_title', $titles);
+}*/
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/marketplace/extension.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[foreach ($files as $file) {]]></search>
+			<add position="before"><![CDATA[$signore = array ('autolinks', 'bot_report', 'canonicals', 'clickfix', 'custom_alt_generator', 'custom_h1_generator', 'custom_h2_generator', 'custom_imgtitle_generator', 'custom_title_generator', 'extendedseo', 'keywords_generator', 'l', 'meta_description_generator', 'mlseo', 'not_found_report', 'redirect', 'rename_files', 'richsnippets', 'rp_generator', 'seoedit', 'seoeditor', 'seoimages', 'seopack', 'seopagination', 'seoreplacer', 'seoreport', 'table_edit_ajax', 'tag_generator');
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$extension = basename($file, '.php');]]></search>
+			<add position="after"><![CDATA[if (!in_array($extension, $signore)) {
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['header']]]></search>
+			<add position="before"><![CDATA[}
+			]]></add>
+		</operation>
+	</file>
+
+		<!-- 404s_report.xml -->
+	<file path="catalog/controller/startup/seo_url.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[$this->request->get['route'] = 'information/information';]]></search>
+			<add position="after"><![CDATA[
+			}
+			}
+			if (isset($this->request->get['route']) && $this->request->get['route'] == 'error/not_found') {if (true) {$this->db->query("insert into " . DB_PREFIX . "404s_report values ('".$this->db->escape($this->request->get['_route_'])."',now());");]]></add>
+		</operation>
+	</file>
+		<!-- smart_redirect.xml -->
+		<file path="catalog/controller/startup/seo_url.php" error="skip">
+		<operation error="skip">
+			<search index="1"><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+			<add position="after"><![CDATA[
+			$redirect_settings = $this->config->get('redirect_settings');
+			if (isset($redirect_settings['redirectmanager'])) {
+				$redirects = $this->config->get('redirect');
+				if ($redirects) {
+				foreach ($redirects as $redirectlink) {
+						if ($redirectlink['title'] == $this->request->get['_route_']) {
+								$this->request->get['_route_'] = $redirectlink['url'];
+							}
+					}
+				}
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[if ($query->num_rows) {]]></search>
+			<add position="before"><![CDATA[
+			$redirect_settings = $this->config->get('redirect_settings');
+			if ((isset($redirect_settings['autoredirect'])) && (!($query->num_rows))) {
+			$link = $this->db->escape($part);
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and keyword sounds like '" . $this->db->escape($part) . "'");
+				if (($query->num_rows)) {
+					$this->db->query("insert into " . DB_PREFIX . "autoredirect values ('".$link."','".$query->row['keyword']."',now());");
+				}
+			}
+			]]></add>
+		</operation>
+
+	</file>
+		<!-- autolinks.xml -->
+		<file path="catalog/view/theme/*/template/common/header.twig">
+		<operation error="skip">
+			<search><![CDATA[</head>]]></search>
+			<add position="before"><![CDATA[
+			<link rel="stylesheet" href="catalog/view/javascript/jquery.cluetip.css" type="text/css" />
+			<script src="catalog/view/javascript/jquery.cluetip.js" type="text/javascript"></script>
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+				$('a.title').cluetip({splitTitle: '|'});
+				  $('ol.rounded a:eq(0)').cluetip({splitTitle: '|', dropShadow: false, cluetipClass: 'rounded', showtitle: false});
+				  $('ol.rounded a:eq(1)').cluetip({cluetipClass: 'rounded', dropShadow: false, showtitle: false, positionBy: 'mouse'});
+				  $('ol.rounded a:eq(2)').cluetip({cluetipClass: 'rounded', dropShadow: false, showtitle: false, positionBy: 'bottomTop', topOffset: 70});
+				  $('ol.rounded a:eq(3)').cluetip({cluetipClass: 'rounded', dropShadow: false, sticky: true, ajaxCache: false, arrows: true});
+				  $('ol.rounded a:eq(4)').cluetip({cluetipClass: 'rounded', dropShadow: false});
+				});
+			</script>
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[</head>]]></search>
+			<add><![CDATA[
+			<link rel="stylesheet" href="catalog/view/javascript/jquery.cluetip.css" type="text/css" />
+			<script src="catalog/view/javascript/jquery.cluetip.js" type="text/javascript"></script>
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+				$('a.title').cluetip({splitTitle: '|'});
+					$('ol.rounded a:eq(0)').cluetip({splitTitle: '|', dropShadow: false, cluetipClass: 'rounded', showtitle: false});
+					$('ol.rounded a:eq(1)').cluetip({cluetipClass: 'rounded', dropShadow: false, showtitle: false, positionBy: 'mouse'});
+					$('ol.rounded a:eq(2)').cluetip({cluetipClass: 'rounded', dropShadow: false, showtitle: false, positionBy: 'bottomTop', topOffset: 70});
+					$('ol.rounded a:eq(3)').cluetip({cluetipClass: 'rounded', dropShadow: false, sticky: true, ajaxCache: false, arrows: true});
+					$('ol.rounded a:eq(4)').cluetip({cluetipClass: 'rounded', dropShadow: false});
+				});
+			</script>
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search index="1"><![CDATA[function]]></search>
+			<add position="before"><![CDATA[
+			private function parseText($node, $keyword, $dom, $link, $target='', $tooltip = 0)
+			{
+				if (mb_strpos($node->nodeValue, $keyword) !== false)
+					{
+						$keywordOffset = mb_strpos($node->nodeValue, $keyword, 0, 'UTF-8');
+						$newNode = $node->splitText($keywordOffset);
+						$newNode->deleteData(0, mb_strlen($keyword, 'UTF-8'));
+						$span = $dom->createElement('a', $keyword);
+						if ($tooltip)
+							{
+								$span->setAttribute('href', '#');
+								$span->setAttribute('style', 'text-decoration:none');
+								$span->setAttribute('class', 'title');
+								$span->setAttribute('title', $keyword.'|'.$link);
+							}
+							else
+							{
+								$span->setAttribute('href', $link);
+								$span->setAttribute('target', $target);
+								$span->setAttribute('style', 'text-decoration:none');
+							}
+
+						$node->parentNode->insertBefore($span, $newNode);
+						$this->parseText($newNode ,$keyword, $dom, $link, $target, $tooltip);
+					}
+			}
+
+
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['attribute_groups']]]></search>
+			<add position="before"><![CDATA[
+				$autolinks = $this->config->get('autolinks');
+
+				if (isset($autolinks) && (strpos($data['description'], 'iframe') == false) && (strpos($data['description'], 'object') == false)){
+				$xdescription = mb_convert_encoding(html_entity_decode($data['description'], ENT_COMPAT, "UTF-8"), 'HTML-ENTITIES', "UTF-8");
+
+				libxml_use_internal_errors(true);
+				$dom = new DOMDocument;
+				$dom->loadHTML('<div>'.$xdescription.'</div>');
+				libxml_use_internal_errors(false);
+
+
+				$xpath = new DOMXPath($dom);
+
+				foreach ($autolinks as $autolink)
+				{
+					$keyword = $autolink['keyword'];
+					$xlink = mb_convert_encoding(html_entity_decode($autolink['link'], ENT_COMPAT, "UTF-8"), 'HTML-ENTITIES', "UTF-8");
+					$target = $autolink['target'];
+					$tooltip = isset($autolink['tooltip']);
+
+					$pTexts = $xpath->query(
+						sprintf('///text()[contains(., "%s")]', $keyword)
+					);
+
+					foreach ($pTexts as $pText) {
+						$this->parseText($pText, $keyword, $dom, $xlink, $target, $tooltip);
+					}
+
+
+				}
+
+				$data['description'] = $dom->saveXML($dom->documentElement);
+
+				}
+
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/information/information.php">
+		<operation error="skip">
+			<search index="1"><![CDATA[function]]></search>
+			<add position="before"><![CDATA[
+			private function parseText($node, $keyword, $dom, $link, $target='', $tooltip = 0)
+			{
+				if (mb_strpos($node->nodeValue, $keyword) !== false)
+					{
+						$keywordOffset = mb_strpos($node->nodeValue, $keyword, 0, 'UTF-8');
+						$newNode = $node->splitText($keywordOffset);
+						$newNode->deleteData(0, mb_strlen($keyword, 'UTF-8'));
+						$span = $dom->createElement('a', $keyword);
+						if ($tooltip)
+							{
+								$span->setAttribute('href', '#');
+								$span->setAttribute('style', 'text-decoration:none');
+								$span->setAttribute('class', 'title');
+								$span->setAttribute('title', $keyword.'|'.$link);
+							}
+							else
+							{
+								$span->setAttribute('href', $link);
+								$span->setAttribute('target', $target);
+								$span->setAttribute('style', 'text-decoration:none');
+							}
+
+						$node->parentNode->insertBefore($span, $newNode);
+						$this->parseText($newNode ,$keyword, $dom, $link, $target, $tooltip);
+					}
+			}
+
+
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['continue']]]></search>
+			<add position="before"><![CDATA[
+				$autolinks = $this->config->get('autolinks');
+
+				if (isset($autolinks) && (strpos($data['description'], 'iframe') == false) && (strpos($data['description'], 'object') == false)){
+				$xdescription = mb_convert_encoding(html_entity_decode($data['description'], ENT_COMPAT, "UTF-8"), 'HTML-ENTITIES', "UTF-8");
+
+				libxml_use_internal_errors(true);
+				$dom = new DOMDocument;
+				$dom->loadHTML('<div>'.$xdescription.'</div>');
+				libxml_use_internal_errors(false);
+
+
+				$xpath = new DOMXPath($dom);
+
+				foreach ($autolinks as $autolink)
+				{
+					$keyword = $autolink['keyword'];
+					$xlink = mb_convert_encoding(html_entity_decode($autolink['link'], ENT_COMPAT, "UTF-8"), 'HTML-ENTITIES', "UTF-8");
+					$target = $autolink['target'];
+					$tooltip = isset($autolink['tooltip']);
+
+					$pTexts = $xpath->query(
+						sprintf('///text()[contains(., "%s")]', $keyword)
+					);
+
+					foreach ($pTexts as $pText) {
+						$this->parseText($pText, $keyword, $dom, $xlink, $target, $tooltip);
+					}
+
+
+				}
+
+				$data['description'] = $dom->saveXML($dom->documentElement);
+				}
+
+			]]></add>
+		</operation>
+	</file>
+		<!-- brands_meta.xml -->
+		<file path="admin/controller/catalog/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[$data['user_token'] = $this->session->data['user_token'];]]></search>
+			<add position="after"><![CDATA[
+
+			$data['entry_meta_description'] = 'Meta Açıklaması';
+			$data['entry_meta_keyword'] = 'Meta Kelimeleri';
+			$data['entry_custom_title'] = 'Meta Başlığı';
+			$data['entry_description'] = 'Açıklama';
+
+			$this->load->model('localisation/language');
+			$data['languages'] = $this->model_localisation_language->getLanguages();
+
+			if (isset($this->request->post['manufacturer_description'])) {
+				$data['manufacturer_description'] = $this->request->post['manufacturer_description'];
+			} elseif (isset($this->request->get['manufacturer_id'])) {
+				$data['manufacturer_description'] = $this->model_catalog_manufacturer->getManufacturerDescriptions($this->request->get['manufacturer_id']);
+			} else {
+				$data['manufacturer_description'] = array();
+			}
+
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/manufacturer.php">
+		<operation error="skip">
+			<search index="2"><![CDATA[$this->db->query("DELETE FROM `" . DB_PREFIX . "seo_url` WHERE query = 'manufacturer_id=" . (int)$manufacturer_id . "'");]]></search>
+			<add position="after"><![CDATA[
+			$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$manufacturer_id = $this->db->getLastId();]]></search>
+			<add position="after"><![CDATA[
+
+			foreach ($data['manufacturer_description'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer_id . "', language_id = '" . (int)$language_id . "', custom_title = '" . $this->db->escape($value['custom_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[pre.admin.edit.manufacturer]]></search>
+			<add position="after"><![CDATA[
+
+			$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+
+			foreach ($data['manufacturer_description'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer_id . "', language_id = '" . (int)$language_id . "', custom_title = '" . $this->db->escape($value['custom_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[pre.admin.manufacturer.edit]]></search>
+			<add position="after"><![CDATA[
+
+			$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+
+			foreach ($data['manufacturer_description'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer_id . "', language_id = '" . (int)$language_id . "', custom_title = '" . $this->db->escape($value['custom_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[function editManufacturer]]></search>
+			<add position="after"><![CDATA[
+			if (VERSION >= '2.3.0.0') {
+
+			$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+
+			foreach ($data['manufacturer_description'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer_id . "', language_id = '" . (int)$language_id . "', custom_title = '" . $this->db->escape($value['custom_title']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', description = '" . $this->db->escape($value['description']) . "'");
+			}
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[public function getManufacturer($manufacturer_id) {]]></search>
+			<add position="before"><![CDATA[
+			public function getManufacturerDescriptions($manufacturer_id) {
+				$manufacturer_description_data = array();
+
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer_description WHERE manufacturer_id = '" . (int)$manufacturer_id . "'");
+
+				foreach ($query->rows as $result) {
+					$manufacturer_description_data[$result['language_id']] = array(
+						'meta_keyword'     => $result['meta_keyword'],
+						'meta_description' => $result['meta_description'],
+						'description'      => $result['description'],
+						'custom_title'     => $result['custom_title']
+					);
+				}
+
+				return $manufacturer_description_data;
+			}
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/manufacturer_form.twig">
+
+		<operation error="skip">
+			<search><![CDATA[</table>]]></search>
+			<add position="before"><![CDATA[
+			 <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">SEO Alanları</td>
+                      <td class="text-left">Değer</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+                    <td class="text-left">{{ entry_description }}</td>
+                    <td class="text-left">{% for language in languages %}
+                      <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                        	 <textarea name="manufacturer_description[{{ language.language_id }}][description]" placeholder="{{ entry_description }}" id="input-description{{ language.language_id }}" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ manufacturer_description[language.language_id] ? manufacturer_description[language.language_id].description }}</textarea>
+                      </div>
+                      {% endfor %}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-left">{{ entry_custom_title }}</td>
+                    <td class="text-left">{% for language in languages %}
+                      <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                       <input type="text" name="manufacturer_description[{{ language.language_id }}][custom_title]" value="{{ manufacturer_description[language.language_id] ? manufacturer_description[language.language_id].custom_title :  ''}}" placeholder="{{ entry_custom_title }}" id="input-custom-title{{ language.language_id }}" class="form-control" />
+                      </div>
+                      {% endfor %}</td>
+                  </tr>
+                   <tr>
+                    <td class="text-left">{{ entry_meta_description }}</td>
+                    <td class="text-left">{% for language in languages %}
+                      <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                       <textarea name="manufacturer_description[{{ language.language_id }}][meta_description]" rows="3" placeholder="{{ entry_meta_description }}" id="input-meta-description{{ language.language_id }}" class="form-control">{{ manufacturer_description[language.language_id] ? manufacturer_description[language.language_id].meta_description : '' }} </textarea>
+                      </div>
+                      {% endfor %}</td>
+                  </tr>
+                   <tr>
+                    <td class="text-left">{{ entry_meta_keyword }}</td>
+                    <td class="text-left">{% for language in languages %}
+                      <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                       <textarea name="manufacturer_description[{{ language.language_id }}][meta_keyword]" rows="3" placeholder="{{ entry_meta_keyword }}" id="input-meta-keyword{{ language.language_id }}" class="form-control">{{ manufacturer_description[language.language_id] ? manufacturer_description[language.language_id].meta_keyword : '' }} </textarea>
+                      </div>
+                      {% endfor %}</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+		  ]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[footer]]></search>
+			<add position="before"><![CDATA[
+			  <link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet" />
+  <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script>
+  <script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script>
+  <script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_to_store m2s ON (m.manufacturer_id = m2s.manufacturer_id) WHERE m.manufacturer_id = '" . (int)$manufacturer_id . "' AND m2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");]]></search>
+			<add position="replace"><![CDATA[$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer m LEFT JOIN " . DB_PREFIX . "manufacturer_description md ON (m.manufacturer_id = md.manufacturer_id) LEFT JOIN " . DB_PREFIX . "manufacturer_to_store m2s ON (m.manufacturer_id = m2s.manufacturer_id) WHERE m.manufacturer_id = '" . (int)$manufacturer_id . "' AND (md.language_id = '" . (int)$this->config->get('config_language_id') . "' OR md.language_id is null) AND m2s.store_id = '" . (int)$this->config->get('config_store_id') . "'");]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle($manufacturer_info['name']);]]></search>
+			<add position="replace"><![CDATA[($manufacturer_info['custom_title'] == '')?$this->document->setTitle($manufacturer_info['name']):$this->document->setTitle($manufacturer_info['custom_title']);]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if ($manufacturer_info) {]]></search>
+			<add position="after"><![CDATA[
+				$this->document->setKeywords($manufacturer_info['meta_keyword']);
+				$this->document->setDescription($manufacturer_info['meta_description']);
+				$data['description'] = html_entity_decode($manufacturer_info['description'], ENT_QUOTES, 'UTF-8');
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/manufacturer_info.twig">
+		<operation error="skip">
+			<search><![CDATA[heading_title]]></search>
+			<add position="after"><![CDATA[
+				{% if description %}
+				  <div class="category-info">
+					{{ description }}
+				  </div>
+				{% endif %}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/product/manufacturer_info.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[$heading_title;]]></search>
+			<add><![CDATA[
+				<?php if ($description) { ?>
+					<div class="category-info">
+					<?php echo $description; ?>
+					</div>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+		<!-- canonicals.xml -->
+		<file path="system/library/document.php">
+		<operation error="skip">
+			<search><![CDATA[function addLink]]></search>
+			<add position="before"><![CDATA[
+				public function removeLink($rel) {
+					foreach ($this->links as $val=>$link) {
+						if ($link['rel'] == $rel) {unset($this->links[$val]);}
+					}
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/category.php">
+		<operation error="skip">
+			<search><![CDATA[$data['column_left']]]></search>
+			<add position="after"><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_categories'])) {
+					$this->document->removeLink('canonical');
+					$pathx = explode('_', $this->request->get['path']);
+					$pathx = end($pathx);
+					$this->document->addLink($this->url->link('product/category', 'path=' . $pathx .((isset($page) && ($page > 1))?('&page='.$page):'') ), 'canonical');
+					}
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[$data['column_left']]]></search>
+			<add position="after"><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_brands'])) {
+					$this->document->removeLink('canonical');
+					if (isset($this->request->get['manufacturer_id'])) {$this->document->addLink($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'].((isset($page) && ($page > 1))?('&page='.$page):'')), 'canonical');}
+					}]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/information/information.php">
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle]]></search>
+			<add position="after"><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_info'])) {
+					$this->document->removeLink('canonical');
+					$this->document->addLink($this->url->link('information/information', 'information_id=' .  $information_id), 'canonical');
+					}]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/special.php">
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle]]></search>
+			<add position="after"><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_specials'])) {
+					$this->document->removeLink('canonical');
+					$this->document->addLink($this->url->link('product/special'.((isset($page) && ($page > 1))?('&page='.$page):'')), 'canonical');
+					}]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/home.php">
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle]]></search>
+			<add position="after"><![CDATA[
+				$canonicals = $this->config->get('canonicals');
+				if (isset($canonicals['canonicals_home'])) {
+					$this->document->addLink($this->config->get('config_url'), 'canonical');
+					}]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search><![CDATA[$data['links']]]></search>
+			<add position="after"><![CDATA[
+				$data['robots'] = '';
+				$extendedseo = $this->config->get('extendedseo');
+				if (isset($extendedseo['robots'])) {
+					$data['robots'] = '<meta name="robots" content="index">';
+					}
+
+				foreach ($data['links'] as $link) {
+					if ($link['rel']=='canonical') {$hasCanonical = true;
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$link['href']."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+					}
+				}
+
+				if (isset($this->request->get['route']) && !isset($hasCanonical) && (strpos($this->request->get['route'], 'error') === false)) {
+					if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+					$this->db->query("insert into " . DB_PREFIX . "bots_report (link, bot, ip, `date`) values ('".$this->url->link($this->request->get['route'])."','".$_SERVER['HTTP_USER_AGENT']."','".$_SERVER['REMOTE_ADDR']."',now());");
+					}
+				}
+
+				$data['canonical_link'] = '';
+				$canonicals = $this->config->get('canonicals');
+				if (!isset($hasCanonical) && isset($this->request->get['route']) && (isset($canonicals['canonicals_extended']))) {
+					$data['canonical_link'] = $this->url->link($this->request->get['route']);
+					}
+
+				]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['home']]]></search>
+			<add position="before"><![CDATA[
+			$extendedseo = $this->config->get('extendedseo');
+			if ((isset($extendedseo['trim_descriptions'])) && ($data['description']) && (strlen($data['description']) > 160)) {
+				$pos=strpos($data['description'], ' ', 156);
+				$data['description'] = substr($data['description'],0,$pos). ' ...';
+			}
+			if ((isset($extendedseo['trim_titles'])) && ($data['title']) && (strlen($data['title']) > 60)) {
+				$pos=strpos($data['title'], ' ', 56);
+				$data['title'] = substr($data['title'],0,$pos). ' ...';
+			}
+			]]></add>
+		</operation>
+
+	</file>
+	<file path="catalog/view/theme/*/template/common/header.twig">
+		<operation error="skip">
+			<search><![CDATA[base href]]></search>
+			<add position="after"><![CDATA[
+{% if canonical_link %}{{ '<link href="'~canonical_link~'" rel="canonical" />' }}{% endif %}
+{% if robots %}{{ robots }}{% endif %}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip">
+			<search position="after"><![CDATA[base href]]></search>
+			<add><![CDATA[
+<?php if ($canonical_link) {echo '<link href="'.$canonical_link.'" rel="canonical" />';} ?>
+<?php if ($robots) {echo $robots;} ?>
+			]]></add>
+		</operation>
+	</file>
+		<!-- custom_alts.xml -->
+		<file path="admin/language/*/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_name']]]></search>
+			<add position="before"><![CDATA[$_['entry_custom_alt']            = 'Resim Alt Etiketi';]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/product_form.twig">
+		<operation error="skip">
+	<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-alt{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_alt }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="product_description[{{ language.language_id }}][custom_alt]" placeholder="{{ entry_custom_alt }}" id="input-custom-alt{{ language.language_id }}" class="form-control" value="{{ product_description[language.language_id] ? product_description[language.language_id].custom_alt }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'], 'custom_alt' => $query->row['custom_alt'],]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['product_options'] = array();]]></search>
+			<add position="before"><![CDATA[$data['entry_custom_alt'] = $this->language->get('entry_custom_alt');]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['description']]]></search>
+			<add position="after"><![CDATA[$data['custom_alt'] = $product_info['custom_alt'];]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/product.twig">
+		<operation error="skip">
+			<search><![CDATA[alt="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[alt="{{ custom_alt ? custom_alt : heading_title }}"]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+			<search position="replace" error="skip"><![CDATA[alt="<?php echo $heading_title; ?>"]]></search>
+			<add><![CDATA[alt="<?php echo $custom_alt; ?>"]]></add>
+		</operation>
+	</file>
+	<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[<p><a onclick="clearseo('Products Tags', '{{ cleartags }}');" class="button" style="background:red">Clear Tags</a></p>]]></search>
+			<add position="before"><![CDATA[<p><a onclick="clearseo('Product Custom Alt Tags', '{{ clearalts  }}');" class="button" style="background:red">Clear Custom Alt Tags</a></p>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>Tags Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom Alt Tags Generator</b></td>
+                <td class="left"><span class="help">Product Custom Alt Tags Generator generates custom alts for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom alt for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom alts, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[calts]" value="{{ seopack_parameters.calts ? seopack_parameters.calts}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_alt_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<!--<file path="admin/view/template/extension/extension/seoimages.twig">
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>SEO Images Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom Alt Tags Generator</b></td>
+                <td class="left"><span class="help">Product Custom Alt Tags Generator generates custom alts for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom alt for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom alts, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[calts]" value="{{ seopack_parameters.calts ? seopack_parameters.calts}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_alt_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/controller/extension/extension/seopack.php">
+		<operation error="skip">
+			<search><![CDATA[public function cleartags() {]]></search>
+			<add position="before"><![CDATA[public function clearalts() {
+
+		$query = $this->db->query("update " . DB_PREFIX . "product_description set custom_alt = '';");
+
+		$this->session->data['success'] = "Ürün Alt Etiketleri silindi";
+
+		$this->response->redirect($this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['cleartags']]]></search>
+			<add position="before"><![CDATA[
+			$data['clearalts'] = $this->url->link('extension/extension/seopack/clearalts', 'user_token=' . $this->session->data['user_token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+		<!-- custom_h1s.xml -->
+		<file path="admin/language/*/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_name']]]></search>
+			<add position="before"><![CDATA[$_['entry_custom_h1']            = 'H1 Etiketi';]]></add>
+		</operation>
+	</file>
+	<file path="admin/language/*/catalog/category.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_name']]]></search>
+			<add position="before"><![CDATA[
+			$_['entry_custom_h1']            = 'H1 Etiketi';
+			$_['entry_custom_h2']            = 'H2 Etiketi';
+			$_['entry_custom_alt']           = 'Resim Alt Etiketi';
+			$_['entry_custom_imgtitle']      = 'Resim Title Etiketi';
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/language/*/catalog/information.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_title']]]></search>
+			<add position="before"><![CDATA[
+			$_['entry_custom_h1']            = 'H1 Etiketi';
+			$_['entry_custom_h2']            = 'H2 Etiketi';
+			$_['entry_custom_alt']           = 'Resim Alt Etiketi';
+			$_['entry_custom_imgtitle']      = 'Resim Title Etiketi';
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/product_form.twig">
+		<operation error="skip">
+			<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-h1{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h1 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="product_description[{{ language.language_id }}][custom_h1]" placeholder="{{ entry_custom_h1 }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ product_description[language.language_id] ? product_description[language.language_id].custom_h1 }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/category_form.twig">
+		<operation error="skip">
+			<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-h1{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h1 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="category_description[{{ language.language_id }}][custom_h1]" placeholder="{{ entry_custom_h1 }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ category_description[language.language_id] ? category_description[language.language_id].custom_h1 }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+				  <label class="col-sm-2 control-label" for="input-custom-h2{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h2 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="category_description[{{ language.language_id }}][custom_h2]" placeholder="{{ entry_custom_h2 }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ category_description[language.language_id] ? category_description[language.language_id].custom_h2 }}" />
+                    </div>
+                  </div>
+                  <div class="form-group"><label class="col-sm-2 control-label" for="input-custom-alt{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_alt }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="category_description[{{ language.language_id }}][custom_alt]" placeholder="{{ entry_custom_alt }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ category_description[language.language_id] ? category_description[language.language_id].custom_alt }}" />
+                    </div>
+                  </div>
+                  <div class="form-group"><label class="col-sm-2 control-label" for="input-custom-imgtitle{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_imgtitle }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="category_description[{{ language.language_id }}][custom_imgtitle]" placeholder="{{ entry_custom_imgtitle }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ category_description[language.language_id] ? category_description[language.language_id].custom_imgtitle }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/information_form.twig">
+		<operation error="skip">
+			<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-h1{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h1 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="information_description[{{ language.language_id }}][custom_h1]" placeholder="{{ entry_custom_h1 }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ information_description[language.language_id] ? information_description[language.language_id].custom_h1 }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+				  <label class="col-sm-2 control-label" for="input-custom-h2{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h2 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="information_description[{{ language.language_id }}][custom_h2]" placeholder="{{ entry_custom_h2 }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ information_description[language.language_id] ? information_description[language.language_id].custom_h2 }}" />
+                    </div>
+                  </div>
+                  <!--
+				  <div class="form-group"><label class="col-sm-2 control-label" for="input-custom-alt{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_alt }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="information_description[{{ language.language_id }}][custom_alt]" placeholder="{{ entry_custom_alt }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ information_description[language.language_id] ? information_description[language.language_id].custom_alt }}" />
+                    </div>
+                  </div>
+                  <div class="form-group"><label class="col-sm-2 control-label" for="input-custom-imgtitle{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_imgtitle }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="information_description[{{ language.language_id }}][custom_imgtitle]" placeholder="{{ entry_custom_imgtitle }}" id="input-meta-description{{ language.language_id }}" class="form-control" value="{{ information_description[language.language_id] ? information_description[language.language_id].custom_imgtitle }}" />
+                    </div>
+                  </div>
+				  -->
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'], 'custom_h1' => $query->row['custom_h1'],]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/category.php">
+		<operation error="skip">
+			<search><![CDATA[category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN]]></search>
+			<add position="replace"><![CDATA[category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_description_seo cds ON (c.category_id = cds.category_id AND cds.language_id = '" . (int)$this->config->get('config_language_id') . "') LEFT JOIN]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'], 'custom_h1' => $query->row['custom_h1'], 'custom_h2' => $query->row['custom_h2'], 'custom_alt' => $query->row['custom_alt'], 'custom_imgtitle' => $query->row['custom_imgtitle'],]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[LEFT JOIN " . DB_PREFIX . "category_description pd ON (p.category_id = pd.category_id)]]></search>
+			<add position="replace"><![CDATA[LEFT JOIN " . DB_PREFIX . "category_description pd ON (p.category_id = pd.category_id) LEFT JOIN " . DB_PREFIX . "category_description_seo pds ON (p.category_id = pds.category_id)]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/information.php">
+		<operation error="skip">
+			<search><![CDATA[information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) LEFT JOIN]]></search>
+			<add position="replace"><![CDATA[information i LEFT JOIN " . DB_PREFIX . "information_description id ON (i.information_id = id.information_id) LEFT JOIN " . DB_PREFIX . "information_description_seo ids ON (i.information_id = ids.information_id AND ids.language_id = '" . (int)$this->config->get('config_language_id') . "') LEFT JOIN]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'],  'custom_h1' => $query->row['custom_h1'], 'custom_h2' => $query->row['custom_h2'], 'custom_alt' => $query->row['custom_alt'], 'custom_imgtitle' => $query->row['custom_imgtitle'],]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[LEFT JOIN " . DB_PREFIX . "information_description pd ON (p.information_id = pd.information_id)]]></search>
+			<add position="replace"><![CDATA[LEFT JOIN " . DB_PREFIX . "information_description pd ON (p.information_id = pd.information_id) LEFT JOIN " . DB_PREFIX . "information_description_seo pds ON (p.information_id = pds.information_id)]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/model/catalog/category.php">
+		<operation error="skip">
+			<search><![CDATA[return $category_description_data;]]></search>
+			<add position="before"><![CDATA[
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description_seo WHERE category_id = '" . (int)$category_id . "'");
+
+		foreach ($query->rows as $result) {
+			$category_description_data[$result['language_id']] = array_merge($category_description_data[$result['language_id']] ,array(
+				'custom_imgtitle' => $result['custom_imgtitle'],
+				'custom_alt'      => $result['custom_alt'],
+				'custom_h1'       => $result['custom_h1'],
+				'custom_h2'		  => $result['custom_h2']
+			));
+		}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "category_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "category_description_seo SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', custom_imgtitle = '" . $this->db->escape($value['custom_imgtitle']) . "', custom_alt = '" . $this->db->escape($value['custom_alt']) . "',  custom_h1 = '" . $this->db->escape($value['custom_h1']) . "', custom_h2 = '" . $this->db->escape($value['custom_h2']) . "'");]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "category_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "category_description_seo WHERE category_id = '" . (int)$category_id . "'");]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/information.php">
+		<operation error="skip">
+			<search><![CDATA[return $information_description_data;]]></search>
+			<add position="before"><![CDATA[
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_description_seo WHERE information_id = '" . (int)$information_id . "'");
+
+		foreach ($query->rows as $result) {
+			$information_description_data[$result['language_id']] = array_merge($information_description_data[$result['language_id']] ,array(
+				'custom_imgtitle' => $result['custom_imgtitle'],
+				'custom_alt'      => $result['custom_alt'],
+				'custom_h1'       => $result['custom_h1'],
+				'custom_h2'		  => $result['custom_h2']
+			));
+		}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "information_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "information_description_seo SET information_id = '" . (int)$information_id . "', language_id = '" . (int)$language_id . "', custom_h1 = '" . $this->db->escape($value['custom_h1']) . "', custom_h2 = '" . $this->db->escape($value['custom_h2']) . "'");]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "information_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "information_description_seo WHERE information_id = '" . (int)$information_id . "'");]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['product_options'] = array();]]></search>
+			<add position="before"><![CDATA[$data['entry_custom_h1'] = $this->language->get('entry_custom_h1');]]></add>
+		</operation>
+
+	</file>
+	<file path="admin/controller/catalog/category.php">
+		<operation error="skip">
+			<search><![CDATA[$data['breadcrumbs']]]></search>
+			<add position="before"><![CDATA[
+			$data['entry_custom_h1'] = $this->language->get('entry_custom_h1');
+			$data['entry_custom_h2'] = $this->language->get('entry_custom_h2');
+			$data['entry_custom_alt'] = $this->language->get('entry_custom_alt');
+			$data['entry_custom_imgtitle'] = $this->language->get('entry_custom_imgtitle');
+			]]></add>
+		</operation>
+
+	</file>
+	<file path="admin/controller/catalog/information.php">
+		<operation error="skip">
+			<search><![CDATA[$data['breadcrumbs']]]></search>
+			<add position="before"><![CDATA[
+			$data['entry_custom_h1'] = $this->language->get('entry_custom_h1');
+			$data['entry_custom_h2'] = $this->language->get('entry_custom_h2');
+			$data['entry_custom_alt'] = $this->language->get('entry_custom_alt');
+			$data['entry_custom_imgtitle'] = $this->language->get('entry_custom_imgtitle');
+			]]></add>
+		</operation>
+
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['heading_title'] = $product_info['name'];]]></search>
+			<add position="replace"><![CDATA[$data['heading_title'] = ($product_info['custom_h1'] <> '')?$product_info['custom_h1']:$product_info['name'];]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/category.php">
+		<operation error="skip">
+			<search><![CDATA[$data['heading_title'] = $category_info['name'];]]></search>
+			<add position="replace"><![CDATA[$data['heading_title'] = ($category_info['custom_h1'] <> '')?$category_info['custom_h1']:$category_info['name'];]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['description']]]></search>
+			<add position="after"><![CDATA[$data['description'] = ($category_info['custom_h2'] != '')?'<h2>'.$category_info['custom_h2'].'</h2>'.$data['description']:$data['description'];]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['heading_title']]]></search>
+			<add position="after"><![CDATA[
+			$data['custom_alt'] = $category_info['custom_alt'];
+			$data['custom_imgtitle'] = $category_info['custom_imgtitle'];
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/information/information.php">
+		<operation error="skip">
+			<search><![CDATA[$data['heading_title'] = $information_info['title'];]]></search>
+			<add position="replace"><![CDATA[$data['heading_title'] = ($information_info['custom_h1'] <> '')?$information_info['custom_h1']:$information_info['title'];]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['description']]]></search>
+			<add position="after"><![CDATA[$data['description'] = ($information_info['custom_h2'] != '')?'<h2>'.$information_info['custom_h2'].'</h2>'.$data['description']:$data['description'];]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['heading_title']]]></search>
+			<add position="after"><![CDATA[
+			$data['custom_alt'] = $information_info['custom_alt'];
+			$data['custom_imgtitle'] = $information_info['custom_imgtitle'];
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/category.twig">
+		<operation error="skip">
+			<search><![CDATA[alt="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[alt="{{ custom_alt ? custom_alt : heading_title }}"]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[title="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[title="{{ custom_imgtitle ? custom_imgtitle : heading_title }}"]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/information.twig">
+		<operation error="skip">
+			<search><![CDATA[alt="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[alt="{{ custom_alt ? custom_alt : heading_title }}"]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[title="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[title="{{ custom_imgtitle ? custom_imgtitle : heading_title }}"]]></add>
+		</operation>
+	</file>
+
+	<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[<p><a onclick="clearseo('Products Tags', '{{ cleartags }}');" class="button" style="background:red">Clear Tags</a></p>]]></search>
+			<add position="before"><![CDATA[<p><a onclick="clearseo('Product Custom H1s', '{{ clearh1s }}');" class="button" style="background:red">Clear Custom H1s</a></p>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>Tags Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom H1 Generator</b></td>
+                <td class="left"><span class="help">Product Custom H1 Generator generates custom h1s for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom h1 for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom h1s, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[ch1s]" value="{{ seopack_parameters.ch1s ? seopack_parameters.ch1s}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_h1_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/controller/extension/extension/seopack.php">
+		<operation error="skip">
+			<search><![CDATA[public function cleartags() {]]></search>
+			<add position="before"><![CDATA[public function clearh1s() {
+
+		$query = $this->db->query("update " . DB_PREFIX . "product_description set custom_h1 = '';");
+
+		$this->session->data['success'] = "H1 Etiketleri silindi";
+
+		$this->response->redirect($this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['cleartags']]]></search>
+			<add position="before"><![CDATA[
+			$data['clearh1s'] = $this->url->link('extension/extension/seopack/clearh1s', 'user_token=' . $this->session->data['user_token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+		<!-- custom_h2s.xml -->
+		<file path="admin/language/*/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_name']]]></search>
+			<add position="before"><![CDATA[$_['entry_custom_h2']            = 'H2 Etiketi';]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/product_form.twig">
+		<operation error="skip">
+			<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-h2{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_h2 }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="product_description[{{ language.language_id }}][custom_h2]" placeholder="{{ entry_custom_h2 }}" id="input-custom-h2{{ language.language_id }}" class="form-control" value="{{ product_description[language.language_id] ? product_description[language.language_id].custom_h2 }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'], 'custom_h2' => $query->row['custom_h2'],]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['product_options'] = array();]]></search>
+			<add position="before"><![CDATA[$data['entry_custom_h2'] = $this->language->get('entry_custom_h2');]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['description']]]></search>
+			<add position="after"><![CDATA[$data['description'] = ($product_info['custom_h2'] != '')?'<h2>'.$product_info['custom_h2'].'</h2>'.$data['description']:$data['description'];]]></add>
+		</operation>
+	</file>
+	<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[<p><a onclick="clearseo('Products Tags', '{{ cleartags }}');" class="button" style="background:red">Clear Tags</a></p>]]></search>
+			<add position="before"><![CDATA[<p><a onclick="clearseo('Product Custom H2s', '{{ clearh2s  }}');" class="button" style="background:red">Clear Custom H2s</a></p>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>Tags Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom H2 Generator</b></td>
+                <td class="left"><span class="help">Product Custom H2 Generator generates custom h2s for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom h2 for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom h2s, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[ch2s]" value="{{ seopack_parameters.ch2s ? seopack_parameters.ch2s}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_h2_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/controller/extension/extension/seopack.php">
+		<operation error="skip">
+			<search><![CDATA[public function cleartags() {]]></search>
+			<add position="before"><![CDATA[public function clearh2s() {
+
+		$query = $this->db->query("update " . DB_PREFIX . "product_description set custom_h2 = '';");
+
+		$this->session->data['success'] = "H2 etiketleri silindi";
+
+		$this->response->redirect($this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['cleartags']]]></search>
+			<add position="before"><![CDATA[
+			$data['clearh2s'] = $this->url->link('extension/extension/seopack/clearh2s', 'user_token=' . $this->session->data['user_token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+		<!-- custom_imgtitles.xml -->
+		<file path="admin/language/*/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$_['entry_name']]]></search>
+			<add position="before"><![CDATA[$_['entry_custom_imgtitle']            = 'Resim Title Etiketi';]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/catalog/product_form.twig">
+		<operation error="skip">
+	<search index="1"><![CDATA[entry_meta_description]]></search>
+			 <add position="before"><![CDATA[<label class="col-sm-2 control-label" for="input-custom-imgtitle{{ language.language_id }}"><span data-toggle="tooltip" title="Ön tanımlı değerler oluşması için boş bırakın">{{ entry_custom_imgtitle }}</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="product_description[{{ language.language_id }}][custom_imgtitle]" placeholder="{{ entry_custom_imgtitle }}" id="input-custom-imgtitle{{ language.language_id }}" class="form-control" value="{{ product_description[language.language_id] ? product_description[language.language_id].custom_imgtitle }}" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$query->row['meta_keyword'],]]></search>
+			<add position="replace"><![CDATA[$query->row['meta_keyword'], 'custom_imgtitle' => $query->row['custom_imgtitle'],]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)]]></search>
+			<add position="replace"><![CDATA[LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX . "product_description_seo pds ON (p.product_id = pds.product_id AND pds.language_id = '" . (int)$this->config->get('config_language_id') . "')]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[return $product_description_data;]]></search>
+			<add position="before"><![CDATA[
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_description_seo WHERE product_id = '" . (int)$product_id . "'");
+
+		foreach ($query->rows as $result) {
+			$product_description_data[$result['language_id']] = array_merge($product_description_data[$result['language_id']] ,array(
+				'custom_imgtitle' => $result['custom_imgtitle'],
+				'custom_alt'      => $result['custom_alt'],
+				'custom_h1'       => $result['custom_h1'],
+				'custom_h2'		  => $result['custom_h2']
+			));
+		}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description_seo SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', custom_imgtitle = '" . $this->db->escape($value['custom_imgtitle']) . "', custom_alt = '" . $this->db->escape($value['custom_alt']) . "',  custom_h1 = '" . $this->db->escape($value['custom_h1']) . "', custom_h2 = '" . $this->db->escape($value['custom_h2']) . "'");]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "product_description]]></search>
+			<add position="before"><![CDATA[$this->db->query("DELETE FROM " . DB_PREFIX . "product_description_seo WHERE product_id = '" . (int)$product_id . "'");]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['product_options'] = array();]]></search>
+			<add position="before"><![CDATA[$data['entry_custom_imgtitle'] = $this->language->get('entry_custom_imgtitle');]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search index="1"><![CDATA[$data['description']]]></search>
+			<add position="after"><![CDATA[$data['custom_imgtitle'] = $product_info['custom_imgtitle'];]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/product.twig">
+		<operation error="skip">
+			<search><![CDATA[title="{{ heading_title }}"]]></search>
+			<add position="replace"><![CDATA[title="{{ custom_imgtitle ? custom_imgtitle : heading_title }}"]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+			<search position="replace" error="skip"><![CDATA[title="<?php echo $heading_title; ?>"]]></search>
+			<add><![CDATA[title="<?php echo $custom_imgtitle; ?>"]]></add>
+		</operation>
+	</file>
+	<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[<p><a onclick="clearseo('Products Tags', '{{ cleartags }}');" class="button" style="background:red">Clear Tags</a></p>]]></search>
+			<add position="before"><![CDATA[<p><a onclick="clearseo('Product Custom Image Title Tags', '{{ clearimgtitles  }}');" class="button" style="background:red">Clear Custom Image Title Tags</a></p>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>Tags Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom Image Title Tags Generator</b></td>
+                <td class="left"><span class="help">Product Custom Image Title Tags Generator generates custom imgtitles for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom imgtitle for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom imgtitles, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[cimgtitles]" value="{{ seopack_parameters.cimgtitles ? seopack_parameters.cimgtitles}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_imgtitle_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<!--<file path="admin/view/template/extension/extension/seoimages.twig">
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>SEO Images Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom Image Title Tags Generator</b></td>
+                <td class="left"><span class="help">Product Custom Image Title Tags Generator generates custom imgtitles for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom imgtitle for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom imgtitles, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[cimgtitles]" value="{{ seopack_parameters.cimgtitles ? seopack_parameters.cimgtitles}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_imgtitle_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/controller/extension/extension/seopack.php">
+		<operation error="skip">
+			<search><![CDATA[public function cleartags() {]]></search>
+			<add position="before"><![CDATA[public function clearimgtitles() {
+
+		$query = $this->db->query("update " . DB_PREFIX . "product_description set custom_imgtitle = '';");
+
+		$this->session->data['success'] = "Resim Title etiketleri silindi";
+
+		$this->response->redirect($this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['cleartags']]]></search>
+			<add position="before"><![CDATA[
+			$data['clearimgtitles'] = $this->url->link('extension/extension/seopack/clearimgtitles', 'user_token=' . $this->session->data['user_token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+
+		<!-- custom_titles.xml -->
+		<file path="catalog/controller/product/category.php">
+		<operation error="skip">
+			<search><![CDATA[setTitle($category_info['meta_title'])]]></search>
+			<add position="replace"><![CDATA[setTitle($category_info['meta_title']?$category_info['meta_title']:$category_info['name'])]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[setTitle($product_info['meta_title'])]]></search>
+			<add position="replace"><![CDATA[setTitle(($product_info['meta_title']?$product_info['meta_title']:$product_info['name']))]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/information/information.php">
+		<operation error="skip">
+			<search><![CDATA[setTitle($information_info['meta_title'])]]></search>
+			<add position="replace"><![CDATA[setTitle($information_info['meta_title']?$information_info['meta_title']:$information_info['title'])]]></add>
+		</operation>
+	</file>
+	<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[<p><a onclick="clearseo('Products Tags', '{{ cleartags }}');" class="button" style="background:red">Clear Tags</a></p>]]></search>
+			<add position="before"><![CDATA[<p><a onclick="clearseo('Product Custom Titles', '{{ cleartitles }}');" class="button" style="background:red">Clear Custom Titles</a></p>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<td class="left"><b>Tags Generator</b></td>]]></search>
+			<add position="before"><![CDATA[<td class="left"><b>Product Custom Meta Titles Generator</b></td>
+                <td class="left"><span class="help">Product Custom Titles Generator generates custom titles for products from relevant keywords from product(%p) and category(%c) names.<br><br>
+				<b>Parameters</b><br>
+				There are available the following parameters and they will be replaced by their actual value: <b>%p</b> - product's name, <b>%c</b> - category's name, <b>%m</b> - model, <b>%s</b> - product's sku, <b>%u</b> - product's upc, <b>%b</b> - product's brand and <b>%$</b> - product's price.<br>
+				<b>Example: %p (%m) by www.mysite.com</b> - will generate the following cutom title for a product called 'iPod' with model = 'iPod4': <b>iPod (iPod4) by www.mysite.com</b>.<br>
+				<i>Before generating custom titles, if you have modified parameters, don't forget to save them using Save Parameters button.</i>
+				</span></td>
+                <td class="left"><input type="text" name="seopack_parameters[ctitles]" value="{{ seopack_parameters.ctitles ? seopack_parameters.ctitles}}" size="10"/></td>
+                <td class="right">
+
+					<a onclick="location = 'controller/extension/extension/custom_title_generator.php?gkey={{ seopack_parameters.gkey}}'" class="button">Generate</a>
+				</td>
+              </tr>
+            </tbody>
+
+			<tbody>
+              <tr>]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/controller/extension/extension/seopack.php">
+		<operation error="skip">
+			<search><![CDATA[public function cleartags() {]]></search>
+			<add position="before"><![CDATA[public function cleartitles() {
+
+		$query = $this->db->query("update " . DB_PREFIX . "product_description set meta_title = '';");
+
+		$this->session->data['success'] = "Ürün Başlık Etiketleri siindi.";
+
+		$this->response->redirect($this->url->link('extension/extension/seopack', 'user_token=' . $this->session->data['user_token'], 'SSL'));
+
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['cleartags']]]></search>
+			<add position="before"><![CDATA[$data['cleartitles'] = $this->url->link('extension/extension/seopack/cleartitles', 'user_token=' . $this->session->data['user_token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/extension/extension/seoedit.php">
+		<operation error="skip">
+			<search><![CDATA[$meta_keyword = $this->db->escape($_POST['meta_keyword']);]]></search>
+			<add position="before"><![CDATA[$meta_title = $this->db->escape($_POST['meta_title']);]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "product_description set meta_keyword = '$meta_keyword' where product_id = $id and language_id = $language_id;");]]></search>
+			<add position="before"><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "product_description set meta_title = '$meta_title' where product_id = $id and language_id = $language_id;");]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "category_description set meta_keyword]]></search>
+			<add position="before"><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "category_description set meta_title = '$meta_title' where category_id = $id and language_id = $language_id;");]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "information_description set meta_keyword]]></search>
+			<add position="before"><![CDATA[$query = $this->db->query("update " . DB_PREFIX . "information_description set meta_title = '$meta_title' where information_id = $id and language_id = $language_id;");]]></add>
+		</operation>
+	</file>
+	<!--<file path="admin/view/template/extension/extension/seoeditor.twig">
+		<operation error="skip">
+			<search><![CDATA[<td class="left"  style="width:220px;">{% if sort  ==  'meta_keyword' %} ]]></search>
+			<add position="before"><![CDATA[
+			<td class="left"  style="width:220px;">{% if sort  ==  'meta_title' %}
+                <a href="{{ sort_meta_title }}" class="{{ order }}">{{ column_meta_title }} </a>
+                {% else %}
+                <a href="{{ sort_meta_title }}">{{ column_meta_title }} </a>
+                 </td> {% endif %}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[ <td><input type="text" name="filter_meta_keyword" value="{{ filter_meta_keyword }}" /></td>]]></search>
+			<add position="before"><![CDATA[<td><input type="text" name="filter_meta_title" value="{{ filter_meta_title }}" /></td>]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[{% if product.meta_keyword  !=  -1 %} ]]></search>
+			<add position="before"><![CDATA[
+
+			{% if product.meta_title  !=  -1 %}
+				   <td class="edit_td">
+					<span id="meta_title_{{ product.type~product.id }}" class="text">{{ product.meta_title }}</span>
+					<textarea class="editbox" id="meta_title_input_{{ product.type~product.id }}"/>{{ product.meta_title }}</textarea>
+				  </td>
+			  {% else %}
+					<td class="left" style="background:lightgrey"></td>
+			  {% endif %}
+			  ]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[textarea class="editbox"]]></search>
+			<add position="replace"><![CDATA[textarea style="width:180px;" class="editbox"]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[var filter_meta_keyword = $('input[name=\'filter_meta_keyword\']').val();]]></search>
+			<add position="before"><![CDATA[
+			var filter_meta_title = $('input[name=\'filter_meta_title\']').val();
+
+			if (filter_meta_title) {
+				url += '&filter_meta_title=' + encodeURIComponent(filter_meta_title);
+			}]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/model/extension/extension/seoeditor.php">
+		<operation error="skip">
+			<search index="1,5"><![CDATA[if (!empty($data['filter_meta_keyword'])) {]]></search>
+			<add position="before"><![CDATA[if (!empty($data['filter_meta_title'])) {
+				$sql .= " AND LCASE(pd.meta_title) LIKE '%" . $this->db->escape(utf8_strtolower($data['filter_meta_title'])) . "%'";
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[pd.meta_keyword,]]></search>
+			<add position="replace"><![CDATA[pd.meta_keyword, pd.meta_title,]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['meta_keyword',]]></search>
+			<add position="replace"><![CDATA['meta_keyword', 'meta_title', ]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[cd.meta_keyword,]]></search>
+			<add position="replace"><![CDATA[cd.meta_keyword, meta_title,]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[id.meta_keyword,]]></search>
+			<add position="replace"><![CDATA[id.meta_keyword, meta_title,]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[-1, -1, -1]]></search>
+			<add position="replace"><![CDATA[-1, -1, -1, -1]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$sql .= " AND 1=2";]]></search>
+			<add position="after"><![CDATA[
+			}
+			if (!empty($data['filter_meta_title'])) {
+				$sql .= " AND 1=2";]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/extension/extension/seoeditor.php">
+		<operation error="skip">
+			<search index="1,4"><![CDATA[if (isset($this->request->get['filter_meta_keyword'])) {]]></search>
+			<add position="before"><![CDATA[
+			if (isset($this->request->get['filter_meta_title'])) {
+				$filter_meta_title = $this->request->get['filter_meta_title'];
+			} else {
+				$filter_meta_title = null;
+			}]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="2,3"><![CDATA[if (isset($this->request->get['filter_meta_keyword'])) {]]></search>
+			<add position="before"><![CDATA[
+			if (isset($this->request->get['filter_meta_title'])) {
+				$url .= '&filter_meta_title=' . $this->request->get['filter_meta_title'];
+			}		]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['filter_meta_keyword' => $filter_meta_keyword,]]></search>
+			<add position="before"><![CDATA[
+			'filter_meta_title' => $filter_meta_title,		]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['meta_keyword'      => $result['meta_keyword'],]]></search>
+			<add position="before"><![CDATA[
+			'meta_title'      => $result['meta_title'],]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['column_meta_keyword'] = $this->language->get('column_meta_keyword');]]></search>
+			<add position="before"><![CDATA[
+			$data['column_meta_title'] = 'Custom Title';]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['sort_meta_keyword'] = $this->url->link('extension/extension/seoeditor', 'user_token=' . $this->session->data['user_token'] . '&sort=meta_keyword' . $url, 'SSL');]]></search>
+			<add position="before"><![CDATA[
+			$data['sort_meta_title'] = $this->url->link('extension/extension/seoeditor', 'user_token=' . $this->session->data['user_token'] . '&sort=meta_title' . $url, 'SSL');]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['filter_meta_keyword'] = $filter_meta_keyword;]]></search>
+			<add position="before"><![CDATA[
+			$data['filter_meta_title'] = $filter_meta_title;]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[|| isset($this->request->get['filter_meta_keyword']) ]]></search>
+			<add position="replace"><![CDATA[|| isset($this->request->get['filter_meta_keyword']) || isset($this->request->get['filter_meta_title']) ]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['filter_meta_keyword'      => $filter_meta_keyword,]]></search>
+			<add position="before"><![CDATA['filter_meta_title'      => $filter_meta_title,]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['meta_keyword'      => html_entity_decode($result['meta_keyword'], ENT_QUOTES, 'UTF-8'),]]></search>
+			<add position="before"><![CDATA['meta_title'      => html_entity_decode($result['meta_title'], ENT_QUOTES, 'UTF-8'),]]></add>
+		</operation>
+
+	</file>
+		<!-- friendly_urls.xml -->
+		<file path="catalog/controller/startup/seo_url.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[$this->request->get['route'] = 'error/not_found';]]></search>
+			<add position="replace"><![CDATA[
+
+			if($this->request->get['_route_'] ==  'alisveris-listem') { $this->request->get['route'] =  'account/wishlist';
+			} elseif ($this->request->get['_route_'] ==  'iletisim') { $this->request->get['route'] =  'information/contact';
+			} elseif ($this->request->get['_route_'] ==  'hesap') { $this->request->get['route'] =  'account/account';
+			} elseif ($this->request->get['_route_'] ==  'sitemap') { $this->request->get['route'] =  'information/sitemap';
+			} elseif ($this->request->get['_route_'] ==  'marka') { $this->request->get['route'] =  'product/manufacturer';
+			} elseif ($this->request->get['_route_'] ==  'affiliates') { $this->request->get['route'] =  'affiliate/account';
+			} elseif ($this->request->get['_route_'] ==  'special') { $this->request->get['route'] =  'product/special';
+			} elseif ($this->request->get['_route_'] ==  'giris') { $this->request->get['route'] =  'account/login';
+			} elseif ($this->request->get['_route_'] ==  'cikis') { $this->request->get['route'] =  'account/logout';
+			} elseif ($this->request->get['_route_'] ==  'kayit') { $this->request->get['route'] =  'account/register';
+			} elseif ($this->request->get['_route_'] ==  'sepet') { $this->request->get['route'] =  'checkout/cart';
+			} elseif ($this->request->get['_route_'] ==  'odeme') { $this->request->get['route'] =  'checkout/checkout';
+			} elseif ($this->request->get['_route_'] ==  'hesap/duzenle') { $this->request->get['route'] =  'account/edit';
+			} elseif ($this->request->get['_route_'] ==  'hesap/sifre') { $this->request->get['route'] =  'account/password';
+			} elseif ($this->request->get['_route_'] ==  'hesap/facebook') { $this->request->get['route'] =  'module/facegiris';
+			} elseif ($this->request->get['_route_'] ==  'hesap/adres') { $this->request->get['route'] =  'account/address';
+			} elseif ($this->request->get['_route_'] ==  'hesap/adres/ekle') { $this->request->get['route'] =  'account/address/add';
+			} elseif ($this->request->get['_route_'] ==  'hesap/sifremi-unuttum') { $this->request->get['route'] =  'account/forgotten';
+			} elseif ($this->request->get['_route_'] ==  'hesap/maillist') { $this->request->get['route'] =  'account/newsletter';
+            } elseif ($this->request->get['_route_'] ==  'hesap/siparis') { $this->request->get['route'] =  'account/order';
+			} elseif ($this->request->get['_route_'] ==  'hesap/iade') { $this->request->get['route'] =  'account/return';
+			} elseif ($this->request->get['_route_'] ==  'hesap/iade/ekle') { $this->request->get['route'] =  'account/return/add';
+			} elseif ($this->request->get['_route_'] ==  'hesap/alim-satim') { $this->request->get['route'] =  'account/transaction';
+			} elseif ($this->request->get['_route_'] ==  'hesap/kupon') { $this->request->get['route'] =  'account/kupon';
+			} elseif ($this->request->get['_route_'] ==  'odeme/tamamlandi') { $this->request->get['route'] =  'checkout/success';
+			}
+			else {
+				$this->request->get['route'] = 'error/not_found';
+			}
+
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$key == 'path']]></search>
+			<add position="before"><![CDATA[
+			} elseif (isset($data['route']) && $data['route'] ==   'common/home') { $url .=  '/';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/wishlist' && $key != 'remove') { $url .=  '/alisveris-listem';
+			} elseif (isset($data['route']) && $data['route'] ==   'information/contact') { $url .=  '/iletisim';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/account') { $url .=  '/hesap';
+			} elseif (isset($data['route']) && $data['route'] ==   'information/sitemap') { $url .=  '/sitemap';
+			} elseif (isset($data['route']) && $data['route'] ==   'product/manufacturer') { $url .=  '/marka';
+			} elseif (isset($data['route']) && $data['route'] ==   'affiliate/account') { $url .=  '/affiliates';
+			} elseif (isset($data['route']) && $data['route'] ==   'product/special' && $key != 'page' && $key != 'sort' && $key != 'limit' && $key != 'order') { $url .=  '/special';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/login') { $url .=  '/giris';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/logout') { $url .=  '/cikis';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/register') { $url .=  '/kayit';
+			} elseif (isset($data['route']) && $data['route'] ==   'checkout/cart') { $url .=  '/sepet';
+		    } elseif (isset($data['route']) && $data['route'] ==   'checkout/checkout') { $url .=  '/odeme';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/edit') { $url .=  '/hesap/duzenle';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/password') { $url .=  '/hesap/sifre';
+			} elseif (isset($data['route']) && $data['route'] ==   'module/facegiris') { $url .=  '/hesap/facebook';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/address') { $url .=  '/hesap/adres';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/address/add') { $url .=  '/hesap/adres/ekle';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/forgotten') { $url .=  '/hesap/sifremi-unuttum';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/newsletter') { $url .=  '/hesap/maillist';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/order') { $url .=  '/hesap/siparis';
+		    } elseif (isset($data['route']) && $data['route'] ==   'account/transaction') { $url .=  '/hesap/alim-satim';
+			} elseif (isset($data['route']) && $data['route'] ==   'account/kupon') { $url .=  '/hesap/kupon';
+			} elseif (isset($data['route']) && $data['route'] ==   'checkout/success') { $url .=  '/odeme/tamamlandi';
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[unset($data['route']);]]></search>
+			<add position="before"><![CDATA[
+				$squery = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_language'");
+				$mlseo = $this->config->get('mlseo');
+				if (isset($this->session->data['language']) && (isset($mlseo['subfolder'])) && (strpos($link, 'language') == false) && (strpos($link, 'currency') == false) && ($this->session->data['language'] <> $squery->row['value']) && (strpos($link, 'blog') == false)) {$url = '/'.$this->session->data['language'].$url;}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+			<add position="before"><![CDATA[
+
+			if (isset($this->request->get['_route_'])) {
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+				if ((strpos($this->request->get['_route_'],$language['code'].'/')) === 0) {
+					$this->session->data['language'] = $language['code'];
+					$this->language = new Language((VERSION >= '2.2.0.0')? $language['code'] : $language['directory']);
+					$this->language->load((VERSION >= '2.2.0.0')? $language['code'] : $language['directory']);
+					$this->registry->set('language', $this->language);
+					$this->config->set('config_language_id', $language['language_id']);
+					$this->request->get['_route_'] = substr( $this->request->get['_route_'], strlen($language['code'].'/'));
+
+			        }
+				}
+			}
+			]]></add>
+		</operation>
+	</file>
+
+		<!-- instant_seo.xml -->
+		<!--<file path="admin/view/template/extension/extension/seopack.twig">
+		<operation error="skip">
+			<search><![CDATA[</table>]]></search>
+			<add position="before"><![CDATA[
+			<tbody>
+              <tr>
+                <td class="left" colspan="2">
+				Auto create SEO URLS for products/categories/brands/info on insert if seo urls don't exist
+				</td>
+				<td class="right" colspan="2">
+				{% if seopack_parameters.autourls %}
+                <input type="radio" name="seopack_parameters[autourls]" value="1" checked="checked" /> Yes
+                <input type="radio" name="seopack_parameters[autourls]" value="0" /> No
+                {% else %}
+                <input type="radio" name="seopack_parameters[autourls]" value="1" /> Yes
+                <input type="radio" name="seopack_parameters[autourls]" value="0" checked="checked" /> No
+                {% endif %}
+				</td>
+			  </tr>
+			  <tr>
+                <td  class="left" colspan="2">
+				Auto create Meta Keywords for products on insert if meta keywords don't exist
+				</td>
+				<td class="right" colspan="2">
+				{% if seopack_parameters.autokeywords %}
+                <input type="radio" name="seopack_parameters[autokeywords]" value="1" checked="checked" /> Yes
+                <input type="radio" name="seopack_parameters[autokeywords]" value="0" /> No
+               {% else %}
+                <input type="radio" name="seopack_parameters[autokeywords]" value="1" /> Yes
+                <input type="radio" name="seopack_parameters[autokeywords]" value="0" checked="checked" /> No
+               {% endif %}
+				</td>
+			  </tr>
+			  <tr>
+                <td class="left" colspan="2">
+				Auto create Meta Descriptions for products on insert if meta descriptions don't exist
+				</td>
+				<td class="right" colspan="2">
+				{% if seopack_parameters.autometa %}
+                <input type="radio" name="seopack_parameters[autometa]" value="1" checked="checked" /> Yes
+                <input type="radio" name="seopack_parameters[autometa]" value="0" /> No
+                {% else %}
+                <input type="radio" name="seopack_parameters[autometa]" value="1" /> Yes
+                <input type="radio" name="seopack_parameters[autometa]" value="0" checked="checked" /> No
+                {% endif %}
+				</td>
+			  </tr>
+			  <tr>
+                <td class="left" colspan="2">
+				Auto create Tags for products on insert if tags don't exist
+				</td>
+				<td class="right" colspan="2">
+				{% if seopack_parameters.autotags %}
+                <input type="radio" name="seopack_parameters[autotags]" value="1" checked="checked" /> Yes
+                <input type="radio" name="seopack_parameters[autotags]" value="0" /> No
+                {% else %}
+                <input type="radio" name="seopack_parameters[autotags]" value="1" /> Yes
+                <input type="radio" name="seopack_parameters[autotags]" value="0" checked="checked" /> No
+                {% endif %}
+				</td>
+			  </tr>
+            </tbody>
+			]]></add>
+		</operation>
+	</file>-->
+	<file path="admin/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[(isset($data['keyword']))]]></search>
+			<add position="replace"><![CDATA[($data['keyword'])]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->cache->delete('product');]]></search>
+			<add position="before"><![CDATA[
+
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` like 'seopack%'");
+
+				foreach ($query->rows as $result) {
+						if (!$result['serialized']) {
+							$data[$result['key']] = $result['value'];
+						} else {
+							if ($result['value'][0] == '{') {$data[$result['key']] = json_decode($result['value'], true);} else {$data[$result['key']] = unserialize($result['value']);}
+						}
+					}
+
+				if (isset($data)) {$seopack_parameters = $data['seopack_parameters'];}
+					else {
+						$seopack_parameters['keywords'] = '%c%p';
+						$seopack_parameters['tags'] = '%c%p';
+						$seopack_parameters['metas'] = '%p - %f';
+						}
+
+
+				if (isset($seopack_parameters['ext'])) { $ext = $seopack_parameters['ext'];}
+					else {$ext = '';}
+
+				if ((isset($seopack_parameters['autokeywords'])) && ($seopack_parameters['autokeywords']))
+					{
+						$query = $this->db->query("select pd.name as pname, cd.name as cname, pd.language_id as language_id, pd.product_id as product_id, p.sku as sku, p.model as model, p.upc as upc, m.name as brand  from " . DB_PREFIX . "product_description pd
+								left join " . DB_PREFIX . "product_to_category pc on pd.product_id = pc.product_id
+								inner join " . DB_PREFIX . "product p on pd.product_id = p.product_id
+								left join " . DB_PREFIX . "category_description cd on cd.category_id = pc.category_id and cd.language_id = pd.language_id
+								left join " . DB_PREFIX . "manufacturer m on m.manufacturer_id = p.manufacturer_id
+								where p.product_id = '" . (int)$product_id . "';");
+
+
+								//die('z');
+						foreach ($query->rows as $product) {
+
+							$bef = array("%", "_","\"","'","\\");
+							$aft = array("", " ", " ", " ", "");
+
+							$included = explode('%', str_replace(array(' ',','), '', $seopack_parameters['keywords']));
+
+							$tags = array();
+
+							if (in_array("p", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['pname']))))));}
+							if (in_array("c", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['cname']))))));}
+							if (in_array("s", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['sku']))))));}
+							if (in_array("m", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['model']))))));}
+							if (in_array("u", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['upc']))))));}
+							if (in_array("b", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['brand']))))));}
+
+							$keywords = '';
+
+							foreach ($tags as $tag)
+								{
+								if (strlen($tag) > 2)
+									{
+
+									$keywords = $keywords.' '.strtolower($tag);
+
+									}
+								}
+
+
+							$exists = $this->db->query("select count(*) as times from " . DB_PREFIX . "product_description where product_id = ".$product['product_id']." and language_id = ".$product['language_id']." and meta_keyword like '%".$keywords."%';");
+
+									foreach ($exists->rows as $exist)
+										{
+										$count = $exist['times'];
+										}
+							$exists = $this->db->query("select length(meta_keyword) as leng from " . DB_PREFIX . "product_description where product_id = ".$product['product_id']." and language_id = ".$product['language_id'].";");
+
+									foreach ($exists->rows as $exist)
+										{
+										$leng = $exist['leng'];
+										}
+
+							if (($count == 0) && ($leng < 255)) {$this->db->query("update " . DB_PREFIX . "product_description set meta_keyword = concat(meta_keyword, '". htmlspecialchars($keywords) ."') where product_id = ".$product['product_id']." and language_id = ".$product['language_id'].";");}
+
+
+							}
+					}
+				if ((isset($seopack_parameters['autometa'])) && ($seopack_parameters['autometa']))
+					{
+						$query = $this->db->query("select pd.name as pname, p.price as price, cd.name as cname, pd.description as pdescription, pd.language_id as language_id, pd.product_id as product_id, p.model as model, p.sku as sku, p.upc as upc, m.name as brand from " . DB_PREFIX . "product_description pd
+								left join " . DB_PREFIX . "product_to_category pc on pd.product_id = pc.product_id
+								inner join " . DB_PREFIX . "product p on pd.product_id = p.product_id
+								left join " . DB_PREFIX . "category_description cd on cd.category_id = pc.category_id and cd.language_id = pd.language_id
+								left join " . DB_PREFIX . "manufacturer m on m.manufacturer_id = p.manufacturer_id
+								where p.product_id = '" . (int)$product_id . "';");
+
+						foreach ($query->rows as $product) {
+
+							$bef = array("%", "_","\"","'","\\", "\r", "\n");
+							$aft = array("", " ", " ", " ", "", "", "");
+
+							$ncategory = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['cname']))));
+							$nproduct = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['pname']))));
+							$model = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['model']))));
+							$sku = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['sku']))));
+							$upc = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['upc']))));
+							$content = strip_tags(html_entity_decode($product['pdescription']));
+							$pos = strpos($content, '.');
+							if($pos === false) {}
+								else { $content =  substr($content, 0, $pos+1);	}
+							$sentence = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft, $content))));
+							$brand = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['brand']))));
+							$price = trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft, number_format($product['price'], 2)))));
+
+							$bef = array("%c", "%p", "%m", "%s", "%u", "%f", "%b", "%$");
+							$aft = array($ncategory, $nproduct, $model, $sku, $upc, $sentence, $brand, $price);
+
+							$meta_description = str_replace($bef, $aft,  $seopack_parameters['metas']);
+
+							$exists = $this->db->query("select count(*) as times from " . DB_PREFIX . "product_description where product_id = ".$product['product_id']." and language_id = ".$product['language_id']." and meta_description not like '%".htmlspecialchars($meta_description)."%';");
+
+									foreach ($exists->rows as $exist)
+										{
+										$count = $exist['times'];
+										}
+
+							if ($count) {$this->db->query("update " . DB_PREFIX . "product_description set meta_description = concat(meta_description, '". htmlspecialchars($meta_description) ."') where product_id = ".$product['product_id']." and language_id = ".$product['language_id'].";");}
+
+							}
+					}
+				if ((isset($seopack_parameters['autotags'])) && ($seopack_parameters['autotags']))
+					{
+					$query = $this->db->query("select pd.name as pname, pd.tag, cd.name as cname, pd.language_id as language_id, pd.product_id as product_id, p.sku as sku, p.model as model, p.upc as upc, m.name as brand from " . DB_PREFIX . "product_description pd
+							inner join " . DB_PREFIX . "product_to_category pc on pd.product_id = pc.product_id
+							inner join " . DB_PREFIX . "product p on pd.product_id = p.product_id
+							inner join " . DB_PREFIX . "category_description cd on cd.category_id = pc.category_id and cd.language_id = pd.language_id
+							left join " . DB_PREFIX . "manufacturer m on m.manufacturer_id = p.manufacturer_id
+							where p.product_id = '" . (int)$product_id . "';");
+
+					foreach ($query->rows as $product) {
+
+						$newtags ='';
+
+						$included = explode('%', str_replace(array(' ',','), '', $seopack_parameters['tags']));
+
+						$tags = array();
+
+
+						$bef = array("%", "_","\"","'","\\");
+						$aft = array("", " ", " ", " ", "");
+
+							if (in_array("p", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['pname']))))));}
+							if (in_array("c", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['cname']))))));}
+							if (in_array("s", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['sku']))))));}
+							if (in_array("m", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['model']))))));}
+							if (in_array("u", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['upc']))))));}
+							if (in_array("b", $included)) {$tags = array_merge($tags, explode(' ',trim($this->db->escape(htmlspecialchars_decode(str_replace($bef, $aft,$product['brand']))))));}
+
+							foreach ($tags as $tag)
+								{
+								if (strlen($tag) > 2)
+									{
+									if ((strpos($product['tag'], strtolower($tag)) === false) && (strpos($newtags, strtolower($tag)) === false))
+										{
+											$newtags .= ' '.strtolower($tag).',';
+										}
+									}
+								}
+
+
+							if ($product['tag']) {
+								$newtags = trim($this->db->escape($product['tag']) . $newtags,' ,');
+								$this->db->query("update " . DB_PREFIX . "product_description set tag = '$newtags' where product_id = '". $product['product_id'] ."' and language_id = '". $product['language_id'] ."';");
+								}
+								else {
+								$newtags = trim($newtags,' ,');
+								$this->db->query("update " . DB_PREFIX . "product_description set tag = '$newtags' where product_id = '". $product['product_id'] ."' and language_id = '". $product['language_id'] ."';");
+								}
+
+						}
+
+					}
+				if ((isset($seopack_parameters['autourls'])) && ($seopack_parameters['autourls']))
+					{
+						require_once(DIR_APPLICATION . 'controller/extension/extension/seopack.php');
+						$seo = new ControllerExtensionExtensionSeoPack('');
+
+						$query = $this->db->query("SELECT pd.product_id, pd.name, pd.language_id ,l.code FROM ".DB_PREFIX."product p
+								inner join ".DB_PREFIX."product_description pd ON p.product_id = pd.product_id
+								inner join ".DB_PREFIX."language l on l.language_id = pd.language_id
+								where p.product_id = '" . (int)$product_id . "';");
+
+
+						foreach ($query->rows as $product_row ){
+
+
+							if( strlen($product_row['name']) > 1 ){
+
+								$slug = $seo->generateSlug($product_row['name']).$ext;
+								$exist_query = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.query = 'product_id=" . $product_row['product_id'] . "' and language_id=".$product_row['language_id']);
+
+								if(!$exist_query->num_rows){
+
+									$exist_keyword = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "'");
+									if($exist_keyword->num_rows){
+										$exist_keyword_lang = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "' AND " . DB_PREFIX . "seo_url.query <> 'product_id=" . $product_row['product_id'] . "'");
+										if($exist_keyword_lang->num_rows){
+												$slug = $seo->generateSlug($product_row['name']).'-'.rand().$ext;
+											}
+											else
+											{
+												$slug = $seo->generateSlug($product_row['name']).'-'.$product_row['code'].$ext;
+											}
+										}
+
+
+									$add_query = "INSERT INTO " . DB_PREFIX . "seo_url (query, keyword, language_id) VALUES ('product_id=" . $product_row['product_id'] . "', '" . $slug . "', " . $product_row['language_id'] . ")";
+									$this->db->query($add_query);
+
+								}
+							}
+						}
+					}
+
+			]]></add>
+		</operation>
+
+	</file>
+	<file path="admin/model/catalog/category.php">
+		<operation error="skip">
+			<search><![CDATA[(isset($data['keyword']))]]></search>
+			<add position="replace"><![CDATA[($data['keyword'])]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->cache->delete('category');]]></search>
+			<add position="before"><![CDATA[
+
+				require_once(DIR_APPLICATION . 'controller/extension/extension/seopack.php');
+				$seo = new ControllerExtensionExtensionSeoPack('');
+
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` like 'seopack%'");
+
+				foreach ($query->rows as $result) {
+						if (!$result['serialized']) {
+							$data[$result['key']] = $result['value'];
+						} else {
+							if ($result['value'][0] == '{') {$data[$result['key']] = json_decode($result['value'], true);} else {$data[$result['key']] = unserialize($result['value']);}
+						}
+					}
+
+				if (isset($data)) {$seopack_parameters = $data['seopack_parameters'];}
+
+				if ((isset($seopack_parameters['autourls'])) && ($seopack_parameters['autourls']))
+					{
+						require_once(DIR_APPLICATION . 'controller/extension/extension/seopack.php');
+						$seo = new ControllerExtensionExtensionSeoPack('');
+
+						$query = $this->db->query("SELECT cd.category_id, cd.name, cd.language_id, l.code FROM ".DB_PREFIX."category c
+								inner join ".DB_PREFIX."category_description cd on c.category_id = cd.category_id
+								inner join ".DB_PREFIX."language l on l.language_id = cd.language_id
+								where c.category_id = '" . (int)$category_id . "'");
+
+
+						foreach ($query->rows as $category_row){
+
+
+							if( strlen($category_row['name']) > 1 ){
+
+								$slug = $seo->generateSlug($category_row['name']);
+								$exist_query =  $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.query = 'category_id=" . $category_row['category_id'] . "' and language_id=".$category_row['language_id']);
+
+								if(!$exist_query->num_rows){
+
+									$exist_keyword = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "'");
+									if($exist_keyword->num_rows){
+										$exist_keyword_lang = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "' AND " . DB_PREFIX . "seo_url.query <> 'category_id=" . $category_row['category_id'] . "'");
+										if($exist_keyword_lang->num_rows){
+												$slug = $seo->generateSlug($category_row['name']).'-'.rand();
+											}
+											else
+											{
+												$slug = $seo->generateSlug($category_row['name']).'-'.$category_row['code'];
+											}
+										}
+
+
+
+									$add_query = "INSERT INTO " . DB_PREFIX . "seo_url (query, keyword,language_id) VALUES ('category_id=" . $category_row['category_id'] . "', '" . $slug . "', " . $category_row['language_id'] . ")";
+									$this->db->query($add_query);
+
+								}
+							}
+						}
+					}
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/information.php">
+		<operation error="skip">
+			<search><![CDATA[(isset($data['keyword']))]]></search>
+			<add position="replace"><![CDATA[($data['keyword'])]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->cache->delete('information');]]></search>
+			<add position="before"><![CDATA[
+
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` like 'seopack%'");
+
+				foreach ($query->rows as $result) {
+						if (!$result['serialized']) {
+							$data[$result['key']] = $result['value'];
+						} else {
+							if ($result['value'][0] == '{') {$data[$result['key']] = json_decode($result['value'], true);} else {$data[$result['key']] = unserialize($result['value']);}
+						}
+					}
+
+				if (isset($data)) {$seopack_parameters = $data['seopack_parameters'];}
+
+				if (isset($seopack_parameters['ext'])) { $ext = $seopack_parameters['ext'];}
+					else {$ext = '';}
+
+				if ((isset($seopack_parameters['autourls'])) && ($seopack_parameters['autourls']))
+					{
+						require_once(DIR_APPLICATION . 'controller/extension/extension/seopack.php');
+						$seo = new ControllerExtensionExtensionSeoPack('');
+
+						$query = $this->db->query("SELECT id.information_id, id.title, id.language_id, l.code FROM ".DB_PREFIX."information i
+							inner join ".DB_PREFIX."information_description id on i.information_id = id.information_id
+							inner join ".DB_PREFIX."language l on l.language_id = id.language_id
+							where i.information_id = '" . (int)$information_id . "';");
+
+						foreach ($query->rows as $info_row){
+
+							if( strlen($info_row['title']) > 1 ){
+
+								$slug = $seo->generateSlug($info_row['title']).$ext;
+								$exist_query = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.query = 'information_id=" . $info_row['information_id'] . "'  and language_id=".$info_row['language_id']);
+
+								if(!$exist_query->num_rows){
+
+									$exist_keyword = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "'");
+									if($exist_keyword->num_rows){
+										$exist_keyword_lang = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "' AND " . DB_PREFIX . "seo_url.query <> 'information_id=" . $info_row['information_id'] . "'");
+										if($exist_keyword_lang->num_rows){
+												$slug = $seo->generateSlug($info_row['title']).'-'.rand();
+											}
+											else
+											{
+												$slug = $seo->generateSlug($info_row['title']).'-'.$info_row['code'];
+											}
+										}
+
+									$add_query = "INSERT INTO " . DB_PREFIX . "seo_url (query, keyword, language_id) VALUES ('information_id=" . $info_row['information_id'] . "', '" . $slug . "', " . $info_row['language_id'] . ")";
+									$this->db->query($add_query);
+
+								}
+							}
+						}
+					}
+
+
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/catalog/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[(isset($data['keyword']))]]></search>
+			<add position="replace"><![CDATA[($data['keyword'])]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->cache->delete('manufacturer');]]></search>
+			<add position="before"><![CDATA[
+
+				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `key` like 'seopack%'");
+
+				foreach ($query->rows as $result) {
+						if (!$result['serialized']) {
+							$data[$result['key']] = $result['value'];
+						} else {
+							if ($result['value'][0] == '{') {$data[$result['key']] = json_decode($result['value'], true);} else {$data[$result['key']] = unserialize($result['value']);}
+						}
+					}
+
+				if (isset($data)) {$seopack_parameters = $data['seopack_parameters'];}
+
+				if ((isset($seopack_parameters['autourls'])) && ($seopack_parameters['autourls']))
+					{
+						require_once(DIR_APPLICATION . 'controller/extension/extension/seopack.php');
+						$seo = new ControllerExtensionExtensionSeoPack('');
+
+						$query = $this->db->query("SELECT l.language_id, m.name, m.manufacturer_id, l.code from ".DB_PREFIX."manufacturer m
+						join ".DB_PREFIX."language l
+						where m.manufacturer_id = '" . (int)$manufacturer_id . "';");
+
+
+						foreach ($query->rows as $manufacturer_row){
+
+
+							if( strlen($manufacturer_row['name']) > 1 ){
+
+								$slug = $seo->generateSlug($manufacturer_row['name'].'-'.$manufacturer_row['code']);
+								$exist_query = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.query = 'manufacturer_id=" . $manufacturer_row['manufacturer_id'] . "' and language_id=".$manufacturer_row['language_id']);
+
+								if(!$exist_query->num_rows){
+
+									$exist_keyword = $this->db->query("SELECT query FROM " . DB_PREFIX . "seo_url WHERE store_id = 0 and " . DB_PREFIX . "seo_url.keyword = '" . $slug . "'");
+									if($exist_keyword->num_rows){ $slug = $seo->generateSlug($manufacturer_row['name']).'-'.rand();}
+
+
+									$add_query = "INSERT INTO " . DB_PREFIX . "seo_url (query, keyword,language_id) VALUES ('manufacturer_id=" . $manufacturer_row['manufacturer_id'] . "', '" . $slug . "', " . $manufacturer_row['language_id'] . ")";
+									$this->db->query($add_query);
+
+								}
+							}
+						}
+					}
+
+			]]></add>
+		</operation>
+	</file>
+		<!-- product_seo_plus.xml -->
+		<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[
+			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+			]]></search>
+			<add position="replace"><![CDATA[
+			$extendedseo = $this->config->get('extendedseo');
+			$data['description'] = ((isset($extendedseo['productseo']))?'<h2>'.$product_info['name'].'</h2>':'').html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/footer.php">
+		<operation error="skip">
+		<search><![CDATA[$this->config->get('config_name')]]></search>
+		<add position="before"><![CDATA[$extendedseo = $this->config->get('extendedseo');]]></add>
+		</operation>
+		<operation error="skip">
+		<search><![CDATA[$this->config->get('config_name')]]></search>
+		<add position="replace"><![CDATA[((isset($extendedseo['link']))?'<a href="'.$this->config->get('config_url').'">':'').$this->config->get('config_name').'</a>']]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[setTitle]]></search>
+			<add position="before"><![CDATA[$extendedseo = $this->config->get('extendedseo');]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[setTitle(]]></search>
+			<add position="replace"><![CDATA[setTitle(((isset($category_info['name']) && isset($extendedseo['categoryintitle']) )?($category_info['name'].' : '):'').]]></add>
+		</operation>
+	</file>
+		<!-- seo_editor.xml -->
+	<file path="admin/view/template/common/header.twig">
+		<operation error="skip">
+			<search><![CDATA[<script type="text/javascript" src="view/javascript/jquery/jquery]]></search>
+			<add position="after"><![CDATA[<script type="text/javascript" src="view/javascript/tableedit.js"></script>]]></add>
+		</operation>
+		<operation error="skip">
+			<search index="1"><![CDATA[href="view/stylesheet/stylesheet.css"]]></search>
+			<add position="after"><![CDATA[<link rel="stylesheet" type="text/css" href="view/stylesheet/tableedit.css" />]]></add>
+		</operation>
+	</file>
+
+	<!-- smart_microdata.xml -->
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['points']]]></search>
+			<add position="after">
+			<![CDATA[
+				$data['mbreadcrumbs'] = array();
+
+				$data['mbreadcrumbs'][] = array(
+					'text'      => $this->language->get('text_home'),
+					'href'      => $this->url->link('common/home')
+				);
+
+				if ($this->model_catalog_product->getFullPath($this->request->get['product_id'])) {
+
+					$path = '';
+
+					$parts = explode('_', (string)$this->model_catalog_product->getFullPath($this->request->get['product_id']));
+
+					$category_id = (int)array_pop($parts);
+
+					foreach ($parts as $path_id) {
+						if (!$path) {
+							$path = $path_id;
+						} else {
+							$path .= '_' . $path_id;
+						}
+
+						$category_info = $this->model_catalog_category->getCategory($path_id);
+
+						if ($category_info) {
+							$data['mbreadcrumbs'][] = array(
+								'text'      => $category_info['name'],
+								'href'      => $this->url->link('product/category', 'path=' . $path)
+							);
+						}
+					}
+
+					$category_info = $this->model_catalog_category->getCategory($category_id);
+
+					if ($category_info) {
+						$url = '';
+
+						$data['mbreadcrumbs'][] = array(
+							'text'      => $category_info['name'],
+							'href'      => $this->url->link('product/category', 'path=' . $this->model_catalog_product->getFullPath($this->request->get['product_id']))
+						);
+					}
+
+
+				} else {
+				$data['mbreadcrumb'] = false;
+				}
+
+				$data['review_no'] = $product_info['reviews'];
+				$data['quantity'] = $product_info['quantity'];
+				$data['currency_code'] = $this->session->data['currency'];
+				$data['richsnippets'] = $this->config->get('richsnippets');
+
+			]]>
+			</add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['recurrings']]]></search>
+			<add position="before"><![CDATA[
+				$data['rprice'] = preg_replace( '/[^.,0-9]/', '',($data['special'] ? $data['special'] : $data['price']));
+				$richsnippets = $this->config->get('richsnippets');
+				$socialseo = '';
+				if (isset($richsnippets['ogsite'])) {
+					$socialseo .= '
+<meta property="og:type" content="product"/>
+<meta property="og:title" content="'.$product_info['name'].'"/>
+<meta property="og:image" content="'.$data['popup'].'"/>
+<meta property="og:url" content="'.$this->url->link('common/home').'"/>
+<meta property="og:description" content="'.$product_info['meta_description'].'"/>
+<meta property="product:price:amount" content="'.preg_replace( '/[^.,0-9]/', '',($data['special'] ? $data['special'] : $data['price'])).'"/>
+<meta property="product:price:currency" content="'.$this->session->data['currency'].'"/>';
+					}
+				if (isset($richsnippets['twittersite'])) {
+					$socialseo .= '
+<meta name="twitter:card" content="product" />';
+if (isset($richsnippets['twitteruser'])) {
+	$socialseo .= '
+<meta name="twitter:site" content="'.$richsnippets['twitteruser'].'" />';
+	}
+$socialseo .= '
+<meta name="twitter:title" content="'.$product_info['name'].'" />
+<meta name="twitter:description" content="'.$product_info['meta_description'].'" />
+<meta name="twitter:image" content="'.$data['popup'].'" />
+<meta name="twitter:label1" content="Price">
+<meta name="twitter:data1" content="'.preg_replace( '/[^.,0-9]/', '',($data['special'] ? $data['special'] : $data['price'])).'">
+<meta name="twitter:label2" content="Currency">
+<meta name="twitter:data2" content="'.$this->session->data['currency'].'">
+';
+}
+				$this->document->setSocialSeo($socialseo);
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/product/product.twig">
+        <operation error="skip">
+            <search index="1"><![CDATA[<h1]]>
+			</search>
+            <add position="before">
+			<![CDATA[
+
+				{% if richsnippets.breadcrumbs %}
+				<span xmlns:v="http://rdf.data-vocabulary.org/#">
+				{% for mbreadcrumb in mbreadcrumbs %} {% if mbreadcrumb.text|striptags %}
+				<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="{{ mbreadcrumb.href}}" alt="{{ mbreadcrumb.text|striptags }}"></a></span>
+
+				{% endif %}  {% endfor %} </span> {% endif %}
+
+
+				{% if richsnippets.product %}
+
+				<span itemscope itemtype="http://schema.org/Product">
+				{%  set mlink = breadcrumbs|last %}
+				<meta itemprop="url" content="{{ mlink.href }}" >
+				<meta itemprop="name" content="{{ heading_title }}" >
+				<meta itemprop="sku" content="{{ model }}" >
+				<meta itemprop="gtin8" content="{{ model }}" >
+				<meta itemprop="brand" content="{{ manufacturer }}" >
+				<meta itemprop="description" content="{{ description }}" >
+				{% if thumb %}
+				<meta itemprop="image" content="{{ thumb }}" >
+				{% endif %}
+
+				{% if images %} {% for image in images %}
+				<meta itemprop="image" content="{{ image.thumb }}" >
+				{% endfor %} {% endif %}
+
+				{% if richsnippets.offer %}
+				<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+				<meta itemprop="url" content="{{ mlink.href }}" >
+				<meta itemprop="price" content="{{ rprice }}" />
+				<meta itemprop="priceCurrency" content="{{ currency_code }}" />
+				<link itemprop="availability" href="http://schema.org/{{ (quantity > 0) ? "InStock" : "OutOfStock"}}" />
+				</span>
+				{% endif %}
+
+				{% if richsnippets.rating  and  review_no %}
+				<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+				<meta itemprop="reviewCount" content="{{ review_no }}">
+				<meta itemprop="ratingValue" content="{{ rating }}">
+				<meta itemprop="bestRating" content="5">
+				<meta itemprop="worstRating" content="1">
+				</span>
+				{% endif %}
+
+				</span>
+				{% endif %}
+            ]]>
+			</add>
+        </operation>
+    </file>
+		<file name="catalog/view/theme/*/template/product/product.tpl">
+	        <operation error="skip">
+	            <search position="before" index="1"><![CDATA[<h1]]>
+				</search>
+	            <add>
+				<![CDATA[
+					<?php
+					if (isset($richsnippets['breadcrumbs'])) { ?>
+					<span xmlns:v="http://rdf.data-vocabulary.org/#">
+					<?php foreach ($mbreadcrumbs as $mbreadcrumb) { if (strip_tags($mbreadcrumb['text'])) { ?>
+					<span typeof="v:Breadcrumb"><a rel="v:url" property="v:title" href="<?php echo $mbreadcrumb['href']; ?>" alt="<?php echo strip_tags($mbreadcrumb['text']); ?>"></a></span>
+					<?php } } ?>
+					</span>
+					<?php }
+					if (isset($richsnippets['product'])) {
+					?>
+					<span itemscope itemtype="http://schema.org/Product">
+					<meta itemprop="url" content="<?php $mlink = end($breadcrumbs); echo $mlink['href']; ?>" >
+					<meta itemprop="name" content="<?php echo $heading_title; ?>" >
+					<meta itemprop="gtin8" content="<?php echo $model; ?>" >
+					<meta itemprop="sku" content="<?php echo $model; ?>" >
+					<meta itemprop="brand" content="<?php echo $manufacturer; ?>" >
+					<meta itemprop="description" content="<?php echo $description; ?>" >
+					<?php if ($thumb) { ?>
+					<meta itemprop="image" content="<?php echo $thumb; ?>" >
+					<?php } ?>
+
+					<?php if ($images) { foreach ($images as $image) {?>
+					<meta itemprop="image" content="<?php echo $image['thumb']; ?>" >
+					<?php } } ?>
+
+					<?php if (isset($richsnippets['offer'])) { ?>
+					<span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+					<meta itemprop="url" content="<?php $mlink = end($breadcrumbs); echo $mlink['href']; ?>" >
+					<meta itemprop="price" content="<?php echo preg_replace( '/[^.,0-9]/', '',($special ? $special : $price)); ?>" />
+					<meta itemprop="priceCurrency" content="<?php echo $currency_code; ?>" />
+					<link itemprop="availability" href="http://schema.org/<?php echo (($quantity > 0) ? "InStock" : "OutOfStock") ?>" />
+					</span>
+					<?php } ?>
+
+					<?php if (isset($richsnippets['rating']) && $review_no) { ?>
+					<span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+					<meta itemprop="reviewCount" content="<?php echo $review_no; ?>">
+					<meta itemprop="ratingValue" content="<?php echo $rating; ?>">
+					<meta itemprop="bestRating" content="5">
+					<meta itemprop="worstRating" content="1">
+					</span>
+					<?php } ?>
+
+					</span>
+					<?php } ?>
+	            ]]>
+				</add>
+	        </operation>
+	    </file>
+	<file path="catalog/model/catalog/product.php">
+		<operation error="skip">
+			<search><![CDATA[function getProductImages]]></search>
+			<add position="before"><![CDATA[
+			   public function getFullPath($product_id) {
+
+				  $query = $this->db->query("SELECT COUNT(product_id) AS total, min(category_id) as catid FROM " . DB_PREFIX . "product_to_category  WHERE product_id = '" . (int)$product_id . "' group by product_id");
+
+				  if ($query->rows) { $total = $query->row['total']; }
+					else { $total = 0; }
+
+				  if ($total >= 1) {
+					 $path = array();
+					 $path[0] = $query->row['catid'];
+
+					 $query = $this->db->query("SELECT parent_id AS pid FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$path[0] . "'");
+
+					if ($query->rows) { $parent_id = $query->row['pid']; }
+						else { $parent_id = 0; }
+
+					 $i = 1;
+					 while($parent_id > 0) {
+						$path[$i] = $parent_id;
+
+						$query = $this->db->query("SELECT parent_id AS pid FROM " . DB_PREFIX . "category WHERE category_id = '" . (int)$parent_id . "'");
+						$parent_id = $query->row['pid'];
+						$i++;
+					 }
+
+					 $path = array_reverse($path);
+
+					 $fullpath = '';
+
+					 foreach($path as $val){
+						$fullpath .= '_'.$val;
+					 }
+
+					 return ltrim($fullpath, '_');
+				  }	else {
+					 return false;
+				  }
+	   }]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search><![CDATA[$data['home']]]></search>
+			<add position="before"><![CDATA[
+				$data['richsnippets'] = $this->config->get('richsnippets');
+				$richsnippets = $this->config->get('richsnippets');
+				if (isset($richsnippets['googlepublisher']) && isset($richsnippets['googleid'])) {
+					array_push($data['links'], array('href'=>'https://plus.google.com/'.$richsnippets['googleid'],'rel'=>'publisher'));
+					}
+				$data['socialseo'] = '';
+				if (isset($richsnippets['ogsite']) & (!isset($this->request->get['route']) || ($this->request->get['route'] == 'common/home'))) {
+					$data['socialseo'] .= '
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="'.$data['title'].'"/>
+<meta property="og:image" content="'.$data['logo'].'"/>
+<meta property="og:site_name" content="'.$data['name'].'"/>
+<meta property="og:url" content="'.$server.'"/>
+<meta property="og:description" content="'.$data['description'].'"/>';
+					}
+				if (isset($richsnippets['twittersite']) & (!isset($this->request->get['route']) || ($this->request->get['route'] == 'common/home'))) {
+					$data['socialseo'] .= '
+<meta name="twitter:card" content="summary" />';
+if (isset($richsnippets['twitteruser'])) {
+	$data['socialseo'] .= '
+<meta name="twitter:site" content="'.$richsnippets['twitteruser'].'" />';
+	}
+$data['socialseo'] .= '
+<meta name="twitter:title" content="'.$data['title'].'" />
+<meta name="twitter:description" content="'.$data['description'].'" />
+<meta name="twitter:image" content="'.$data['logo'].'" />';
+}
+				if (isset($this->request->get['route']) && ($this->request->get['route'] == 'product/product')) {
+					$data['socialseo'] .=  $this->document->getSocialSeo();
+					}
+
+			]]></add>
+			</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/common/header.twig">
+		<operation error="skip">
+			<search><![CDATA[</head>]]></search>
+			<add position="before"><![CDATA[
+				{% if socialseo %}{{ socialseo }}{% endif %}
+
+				{% if richsnippets.store %}
+<script type="application/ld+json">
+				{ "@context" : "http://schema.org",
+				  "@type" : "Organization",
+				  "name" : "{{ name }}",
+				  "url" : "{{ home }}",
+				  "logo" : "{{ logo }}",
+				  "contactPoint" : [
+					{ "@type" : "ContactPoint",
+					  "telephone" : "{{ telephone }}",
+					  "contactType" : "customer service"
+					} ] }
+				</script>
+				{% endif %}
+			]]></add>
+			</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip">
+			<search position="before"><![CDATA[</head>]]></search>
+			<add><![CDATA[
+				<?php if (isset($socialseo)) {echo $socialseo;} ?>
+
+				<?php if (isset($richsnippets['store'])) { ?>
+<script type="application/ld+json">
+				{ "@context" : "http://schema.org",
+					"@type" : "Organization",
+					"name" : "<?php echo $name; ?>",
+					"url" : "<?php echo $home; ?>",
+					"logo" : "<?php echo $logo; ?>",
+					"contactPoint" : [
+					{ "@type" : "ContactPoint",
+						"telephone" : "<?php echo $telephone; ?>",
+						"contactType" : "customer service"
+					} ] }
+				</script>
+				<?php } ?>
+			]]></add>
+			</operation>
+	</file>
+	<file path="system/library/document.php">
+		<operation error="skip">
+			<search><![CDATA[private $description;]]></search>
+			<add position="before"><![CDATA[
+				private $socialseo;
+				]]></add>
+		</operation>
+	   <operation error="skip">
+			<search><![CDATA[getDescription]]></search>
+			<add position="before"><![CDATA[
+				public function setSocialSeo($socialseo) {
+					$this->socialseo = $socialseo;
+				}
+
+				public function getSocialSeo() {
+					return $this->socialseo;
+				}
+				]]></add>
+		</operation>
+	</file>
+
+	<!-- smart_seo_pagination.xml -->
+	<file path="catalog/controller/startup/seo_url.php" error="skip">
+		<operation error="skip">
+			<search index="1"><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+			<add position="after"><![CDATA[
+			if (strpos($this->request->get['_route_'], '/page/') !== false) {
+					$this->request->get['page'] = str_replace('/page/','',substr($this->request->get['_route_'], strpos($this->request->get['_route_'], '/page/')));
+					$this->request->get['_route_'] = str_replace('/page/'.$this->request->get['page'],'',$this->request->get['_route_']);
+
+
+				}
+			]]></add>
+		</operation>
+
+		<operation error="skip">
+			<search><![CDATA[($url)]]></search>
+			<add position="before"><![CDATA[
+			$seopagination = $this->config->get('seopagination');
+			if (isset($key) && $key == 'page' && $url && (isset($seopagination['pagination']))) {
+						$url .= '/page/' . $value;
+						unset($data[$key]);
+					}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="system/library/pagination.php">
+		<operation error="skip">
+			<search><![CDATA[function render]]></search>
+			<add position="before"><![CDATA[
+				public function prevnext() {
+					$total = $this->total;
+
+					if ($this->page < 1) {
+						$page = 1;
+					} else {
+						$page = $this->page;
+					}
+
+					if (!(int)$this->limit) {
+						$limit = 10;
+					} else {
+						$limit = $this->limit;
+					}
+
+					$num_links = $this->num_links;
+					$num_pages = ceil($total / $limit);
+
+					$output = array();
+
+					if ($page > 1) {
+						$output[] = array("rel" => "prev", "href" => str_replace('{page}', $page - 1, $this->url));
+					}
+
+
+					if ($page < $num_pages) {
+						$output[] = array("rel" => "next", "href" => str_replace('{page}', $page + 1, $this->url));
+					}
+
+					return $output;
+				}
+				]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA['&page={page}']]></search>
+			<add position="replace"><![CDATA['&page={page}', 'page/{page}/']]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/category.php|catalog/controller/product/manufacturer.php|catalog/controller/product/special.php">
+		<operation error="skip">
+			<search><![CDATA[// http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html]]></search>
+			<add position="replace"><![CDATA[/* // http://googlewebmastercentral.blogspot.com/2011/09/pagination-with-relnext-and-relprev.html ]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$data['sort'] = $sort;]]></search>
+			<add position="replace"><![CDATA[// */
+			$data['sort'] = $sort;]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/category.php">
+		<operation error="skip">
+			<search><![CDATA[$data['pagination'] = $pagination->render();]]></search>
+			<add position="after"><![CDATA[
+				foreach ($pagination->prevnext() as $pagelink) {
+					$this->document->addLink($pagelink['href'], $pagelink['rel']);
+				}
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/manufacturer.php">
+		<operation error="skip">
+			<search><![CDATA[$data['pagination'] = $pagination->render();]]></search>
+			<add position="after"><![CDATA[
+				foreach ($pagination->prevnext() as $pagelink) {
+					$this->document->addLink($pagelink['href'], $pagelink['rel']);
+				}
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/product.php">
+		<operation error="skip">
+			<search><![CDATA[$data['pagination'] = $pagination->render();]]></search>
+			<add position="after"><![CDATA[
+				foreach ($pagination->prevnext() as $pagelink) {
+					$this->document->addLink($pagelink['href'], $pagelink['rel']);
+				}
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/search.php">
+		<operation error="skip">
+			<search><![CDATA[$data['pagination'] = $pagination->render();]]></search>
+			<add position="after"><![CDATA[
+				foreach ($pagination->prevnext() as $pagelink) {
+					$this->document->addLink($pagelink['href'], $pagelink['rel']);
+				}
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/product/special.php">
+		<operation error="skip">
+			<search><![CDATA[$data['pagination'] = $pagination->render();]]></search>
+			<add position="after"><![CDATA[
+				foreach ($pagination->prevnext() as $pagelink) {
+					$this->document->addLink($pagelink['href'], $pagelink['rel']);
+				}
+				]]></add>
+		</operation>
+	</file>
+
+	<!-- smart_seo_tags.xml -->
+	<file path="catalog/controller/startup/seo_url.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->get['route'])) {]]></search>
+			<add position="before"><![CDATA[
+			if (strpos($this->request->get['_route_'], 'tags/') !== false) {
+					$this->request->get['route'] = 'product/search';
+					$this->request->get['tag'] = str_replace('tags/','',$this->request->get['_route_']);
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (!isset($this->request->get['route'])) {]]></search>
+			<add position="before"><![CDATA[
+			if (strpos($this->request->get['_route_'], 'tags/') !== false) {
+					$this->request->get['route'] = 'product/search';
+					$this->request->get['tag'] = str_replace('tags/','',$this->request->get['_route_']);
+				}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[parse_str]]></search>
+			<add position="after"><![CDATA[
+			$extendedseo = $this->config->get('extendedseo');
+			if (isset($data['route']) && ($data['route'] == 'product/category') || ($data['route'] == 'product/manufacturer/info')) {$slash = true;}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[($url)]]></search>
+			<add position="before"><![CDATA[
+			if (isset($slash)&& (isset($extendedseo['slash'])) && ($slash)) {$url = $url.'/'; $slash = false;}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[elseif ($key == 'path')]]></search>
+			<add position="before"><![CDATA[
+			} elseif ($data['route'] == 'product/search' && (isset($extendedseo['seotags'])) && ($key == 'filter_tag' || $key == 'tag')) {
+						$url .= '/tags/' . $value;
+						unset($data[$key]);
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/product/search.php">
+		<operation error="skip">
+			<search><![CDATA[$this->request->get['filter_tag']]]></search>
+			<add position="replace"><![CDATA[$this->request->get['tag']]]></add>
+		</operation>
+	</file>
+
+	<!-- ML_seo_keywords.xml -->
+
+
+	<file path="admin/view/template/setting/setting.twig|admin/view/template/setting/store_form.twig">
+		<operation error="skip">
+			<search><![CDATA[<input type="text" name="config_meta_title" value="{{ config_meta_title }}" placeholder="{{ entry_meta_title }}" id="input-meta-title" class="form-control" />]]></search>
+			<add position="replace"><![CDATA[
+			{% for language in languages %}
+			<input type="text" name="config_meta_title[{{language.language_id}}]" value="{% if config_meta_title[language.language_id] %}{{config_meta_title[language.language_id]}}{% endif %}" placeholder="{{entry_meta_title}}" id="input-meta-title" class="form-control" />
+
+		 <img src="language/{{language.code}}/{{language.code}}.png" title="{{language.name}}" />
+
+		 <br>
+			 {% endfor %}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<textarea name="config_meta_description" rows="5" placeholder="{{ entry_meta_description }}" id="input-meta-description" class="form-control">{{ config_meta_description }}</textarea>]]></search>
+			<add position="replace"><![CDATA[
+			{% for language in languages %}
+			<textarea name="config_meta_description[{{language.language_id}}]" rows="5" placeholder="{{entry_meta_description}}" id="input-meta-description" class="form-control">{% if config_meta_description[language.language_id] %}{{config_meta_description[language.language_id]}}{% endif %}</textarea>
+
+		 <img src="language/{{language.code}}/{{language.code}}.png" title="{{language.name}}" />
+
+		 <br>
+			 {% endfor %}
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[<textarea name="config_meta_keyword" rows="5" placeholder="{{ entry_meta_keyword }}" id="input-meta-keyword" class="form-control">{{ config_meta_keyword }}</textarea>]]></search>
+			<add position="replace"><![CDATA[
+			{% for language in languages %}
+			<textarea name="config_meta_keyword[{{language.language_id}}]" rows="5" placeholder="{{entry_meta_keyword}}" id="input-meta-keyword" class="form-control">{% if config_meta_keyword[language.language_id] %}{{config_meta_keyword[language.language_id]}}{% endif %}</textarea>
+
+		 <img src="language/{{language.code}}/{{language.code}}.png" title="{{language.name}}" />
+
+		 <br>
+			 {% endfor %}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="admin/controller/setting/setting.php|admin/controller/setting/store.php">
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->post['config_meta_title'])) {]]></search>
+			<add position="before"><![CDATA[$data['config_meta_title'] =array();
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->post['config_meta_description'])) {]]></search>
+			<add position="before"><![CDATA[$data['config_meta_description'] =array();
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->post['config_meta_keyword'])) {]]></search>
+			<add position="before"><![CDATA[$data['config_meta_keyword'] =array();
+			]]></add>
+		</operation>
+	</file>
+	<file path="catalog/controller/common/language.php|catalog/controller/common/currency.php">
+		<operation error="skip">
+			<search><![CDATA[$data['redirect']]]></search>
+			<add position="after"><![CDATA[
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+					$data['redirect'] = str_replace('/'.$language['code'].'/','/',$data['redirect']);
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/common/home.php">
+		<operation error="skip">
+			<search><![CDATA[$this->config->get('config_meta_title')]]></search>
+			<add position="replace"><![CDATA[$titles[$this->config->get('config_language_id')]]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->config->get('config_meta_description')]]></search>
+			<add position="replace"><![CDATA[$meta_descriptions[$this->config->get('config_language_id')]]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->config->get('config_meta_keyword')]]></search>
+			<add position="replace"><![CDATA[$meta_keywords[$this->config->get('config_language_id')]]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle]]></search>
+			<add position="before"><![CDATA[
+			$titles = $this->config->get('config_meta_title');
+			$meta_descriptions = $this->config->get('config_meta_description');
+			$meta_keywords = $this->config->get('config_meta_keyword');
+
+			if (!is_array($titles)) {
+			$titles = array();
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+					$language_id = $language['language_id'];
+					$titles[$language_id] = $this->config->get('config_meta_title');
+				}
+			}
+			if (!is_array($meta_descriptions)) {
+			$meta_descriptions = array();
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+					$language_id = $language['language_id'];
+					$meta_descriptions[$language_id] = $this->config->get('config_meta_title');
+				}
+			}
+			if (!is_array($meta_keywords)) {
+			$meta_keywords = array();
+			$lquery = $this->db->query("SELECT * FROM " . DB_PREFIX . "language;");
+			foreach ($lquery->rows as $language) {
+					$language_id = $language['language_id'];
+					$meta_keywords[$language_id] = $this->config->get('config_meta_title');
+				}
+			}
+			]]></add>
+		</operation>
+	</file>
+
+
+	<file path="catalog/controller/common/header.php">
+		<operation error="skip">
+			<search><![CDATA[$data['base']]]></search>
+			<add position="before"><![CDATA[
+				$data['alternate'] = '';
+				$mlseo = $this->config->get('mlseo');
+				if (isset($mlseo['hreflang'])) {
+					$this->load->model('localisation/language');
+					$languages = $this->model_localisation_language->getLanguages();
+
+					if (isset($this->request->get['route'])) {
+						if ((isset($mlseo['hreflangproduct'])) & ($this->request->get['route'] == 'product/product')) {
+							foreach($languages as $xlanguage) {
+
+
+								$squery = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_language'");
+								if (isset($xlanguage['code']) && ($xlanguage['code'] != $squery->row['value'])) {$url = $xlanguage['code'].'/';}
+									else {$url = '';}
+
+								$query = $this->db->query("select * from " . DB_PREFIX . "seo_url where store_id = 0 and CONCAT('product_id=', CAST(".$this->request->get['product_id']." as CHAR)) = query and language_id = ".  $xlanguage['language_id']);
+								if ($query->num_rows) {
+									$url .= $query->row['keyword'];
+								}
+
+								$data['alternate'] .='<link rel="alternate" hreflang="'.$xlanguage['code'].'" href="'.HTTP_SERVER.$url.'" />';
+
+
+							}
+						}
+
+						if ((isset($mlseo['hreflangcategory'])) & ($this->request->get['route'] == 'product/category')) {
+							$xcats = explode('_', $this->request->get['path']); $xcat = end($xcats);
+							foreach($languages as $xlanguage) {
+
+
+								$squery = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_language'");
+								if (isset($xlanguage['code']) && ($xlanguage['code'] != $squery->row['value'])) {$url = $xlanguage['code'].'/';}
+									else {$url = '';}
+
+								$query = $this->db->query("select * from " . DB_PREFIX . "seo_url where store_id = 0 and CONCAT('category_id=', CAST(".$xcat." as CHAR)) = query and language_id = ".  $xlanguage['language_id']);
+								if ($query->num_rows) {
+									$url .= $query->row['keyword'];
+								}
+								$extendedseo = $this->config->get('extendedseo');
+								$data['alternate'] .='<link rel="alternate" hreflang="'.$xlanguage['code'].'" href="'.HTTP_SERVER.$url.((isset($extendedseo['slash']))?'/':'').'" />';
+
+
+							}
+						}
+
+						if ((isset($mlseo['hreflangbrand'])) & ($this->request->get['route'] == 'product/manufacturer/info')) {
+							foreach($languages as $xlanguage) {
+
+
+								$squery = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_language'");
+								if (isset($xlanguage['code']) && ($xlanguage['code'] != $squery->row['value'])) {$url = $xlanguage['code'].'/';}
+									else {$url = '';}
+
+								$query = $this->db->query("select * from " . DB_PREFIX . "seo_url where store_id = 0 and CONCAT('manufacturer_id=', CAST(".$this->request->get['manufacturer_id']." as CHAR)) = query and language_id = ".  $xlanguage['language_id']);
+								if ($query->num_rows) {
+									$url .= $query->row['keyword'];
+								}
+								$extendedseo = $this->config->get('extendedseo');
+								$data['alternate'] .='<link rel="alternate" hreflang="'.$xlanguage['code'].'" href="'.HTTP_SERVER.$url.((isset($extendedseo['slash']))?'/':'').'" />';
+
+
+							}
+						}
+
+						if ((isset($mlseo['hreflanginfo'])) & ($this->request->get['route'] == 'information/information')) {
+							foreach($languages as $xlanguage) {
+
+
+								$squery = $this->db->query("SELECT `value` FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_language'");
+								if (isset($xlanguage['code']) && ($xlanguage['code'] != $squery->row['value'])) {$url = $xlanguage['code'].'/';}
+									else {$url = '';}
+
+								$query = $this->db->query("select * from " . DB_PREFIX . "seo_url where store_id = 0 and CONCAT('information_id=', CAST(".$this->request->get['information_id']." as CHAR)) = query and language_id = ".  $xlanguage['language_id']);
+								if ($query->num_rows) {
+									$url .= $query->row['keyword'];
+								}
+
+								$data['alternate'] .='<link rel="alternate" hreflang="'.$xlanguage['code'].'" href="'.HTTP_SERVER.$url.'" />';
+
+
+							}
+						}
+
+
+
+					}
+				}
+
+				]]></add>
+		</operation>
+	</file>
+	<file path="catalog/view/theme/*/template/common/header.twig" error="skip">
+		<operation error="skip">
+			<search><![CDATA[base href]]></search>
+			<add position="after"><![CDATA[{% if alternate %}{{ alternate }}{% endif %}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[base href]]></search>
+			<add><![CDATA[<?php if (isset($alternate)) {echo $alternate;} ?>
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/extension/feed/google_sitemap.php" error="skip">
+		<operation error="skip">
+			<search><![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]></search>
+			<add position="after"><![CDATA[
+			$data['extra_languages'] = array();
+			$query = $this->db->query("SELECT DISTINCT ua.language_id, l.code, l.name FROM " . DB_PREFIX . "seo_url ua INNER JOIN " . DB_PREFIX . "language l on l.language_id = ua.language_id ;");
+			$data['extra_languages'] = $query->rows;
+			if (count($data['extra_languages']) <= 1) {$data['extra_languages'] = array();}
+			$data['http'] = HTTP_CATALOG;
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/view/template/extension/feed/google_sitemap.twig" error="skip">
+		<operation error="skip">
+			<search><![CDATA[</form>]]></search>
+			<add position="before"><![CDATA[
+			{% for extra_language in extra_languages %}
+				<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-data-feed">{{entry_data_feed~' (for '~extra_language.name~')'}}</label>
+				<div class="col-sm-10">
+				  <textarea rows="2" readonly="readonly" id="input-data-feed" class="form-control">{{http~'index.php?route=extension/feed/google_sitemap_extra&language='~extra_language.code}}</textarea>
+				</div>
+			  </div>
+			{% endfor %}
+			]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/extension/extension/seoreport.php">
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('product_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = pd.language_id and CONCAT('product_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('category_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = cd.language_id and CONCAT('category_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('information_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = id.language_id and CONCAT('information_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('manufacturer_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = '" . (int)$this->session->data['language_id'] . "' and CONCAT('manufacturer_id]]></add>
+		</operation>
+	</file>
+	<file path="admin/model/extension/extension/seoeditor.php">
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('product_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = pd.language_id and CONCAT('product_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('category_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = cd.language_id and CONCAT('category_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('information_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = id.language_id and CONCAT('information_id]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url u on  CONCAT('manufacturer_id]]></search>
+			<add position="replace"><![CDATA[seo_url u on u.language_id = '" . (int)$this->session->data['language_id'] . "' and CONCAT('manufacturer_id]]></add>
+		</operation>
+	</file>
+	<file path="admin/controller/extension/extension/seoedit.php">
+		<operation error="skip">
+			<search><![CDATA[where query]]></search>
+			<add position="replace"><![CDATA[where language_id = $language_id and query]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[seo_url(query, keyword) values(]]></search>
+			<add position="replace"><![CDATA[seo_url(language_id, query, keyword) values($language_id,]]></add>
+		</operation>
+	</file>
+</file>
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+	<operation error="skip">
+		<search position="before"><![CDATA[
+		</body>
+		]]></search>
+		<add><![CDATA[<div class="copyright-opencart">
+		<span>OpencartUzman</span> <a href="https://www.opencartuzman.com/" target="blank">Opencart</a> E-Ticaret sistemleri ile hazırlanmıştır.
+		</div>
+		<style>
+		.copyright-opencart {
+		background: #fff;
+		color: #4c4e52;
+		text-align: center;
+		font-size: 11px;
+		}
+		</style>
+		]]></add>
+	</operation>
+</file>
+		<file name="catalog/view/theme/*/template/common/footer.twig">
+	<operation error="skip">
+		<search position="before"><![CDATA[
+		</footer>
+		]]></search>
+		<add><![CDATA[<div class="copyright-opencart">
+		<span>OpencartUzman</span> <a href="https://www.opencartuzman.com/" target="blank">Opencart</a> E-Ticaret sistemleri ile hazırlanmıştır.
+		</div>
+		<style>
+		.copyright-opencart {
+		background: #fff;
+		color: #4c4e52;
+		text-align: center;
+		font-size: 11px;
+		}
+		</style>
+		]]></add>
+	</operation>
+</file>
+</modification>

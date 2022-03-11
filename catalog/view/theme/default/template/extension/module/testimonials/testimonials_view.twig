@@ -1,0 +1,97 @@
+{{ header }}
+<div class="container">
+    <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <div class="row">{{ column_left }}
+        {% if column_left and column_right %}
+            {% set class = 'col-sm-6' %}
+        {% elseif column_left or column_right %}
+            {% set class = 'col-sm-9' %}
+        {% else %}
+            {% set class = 'col-sm-12' %}
+        {% endif %}
+        <div id="content" class="{{ class }}">{{ content_top }}
+        
+            <h2>{{ heading_title }}</h2>
+        
+            <div class="row">
+                <div class="testimonial_plus_theme2">
+                    <div class="testimonial2">
+                        <div class="inner">
+                            <div class="thumbnail"><img src="{{ testimonial.avatar }}"/></div>
+            
+                            <!--Content-->
+                            <div class="contents">
+                                <p><img src="catalog/view/theme/default/image/testimonials/left_coma.png" alt="" width="34" height="22" /> {{ preg_replace }}
+                                <img src="catalog/view/theme/default/image/testimonials/right_coma.png" alt="" width="34" height="22" class="right_coma" /></p>
+                                <div class='movie_choice'>
+                                    <div id="r{{ testimonial.testimonials_id }}" class="rate_widget">
+                                        <div class="star_1 ratings_stars"></div>
+                                        <div class="star_2 ratings_stars"></div>
+                                        <div class="star_3 ratings_stars"></div>
+                                        <div class="star_4 ratings_stars"></div>
+                                        <div class="star_5 ratings_stars"></div>
+                                        <div class="total_votes">vote data</div>
+                                    </div>
+                                </div>
+                                <h4>
+                                    {% if testimonial.contact_name is defined %}
+                                        <b>{{ testimonial.contact_name }}</b>
+                                    {% endif %}
+
+                                    {% if testimonial.website is defined %}
+                                        {{ t.website|replace({'http://': ''}) }}
+                                    {% endif %}
+                                </h4>                        
+                            </div>    
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        {{ content_bottom }}</div>
+
+    {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+    var url_fetch = 'index.php?route=extension/module/testimonials/testimonials/fetchRate&testimonials_id={{ testimonial.testimonials_id }}';
+
+    // This is the first thing we add ------------------------------------------
+    $(document).ready(function () {
+
+        $('.rate_widget').each(function (i) {
+            var widget = this;
+            var out_data = {
+                widget_id: $(widget).attr('id'),
+                fetch: 1
+            };
+            $.post(
+                url_fetch,
+                out_data,
+                function (INFO) {
+                    $(widget).data('fsr', INFO);
+                    set_votes(widget);
+                },
+                'json'
+            );
+        });
+        
+    });
+    function set_votes(widget) {
+
+        var avg = $(widget).data('fsr').whole_avg;
+        var votes = $(widget).data('fsr').number_votes;
+        var exact = $(widget).data('fsr').dec_avg;
+
+        $(widget).find('.star_' + avg).prevAll().andSelf().addClass('ratings_vote');
+        $(widget).find('.star_' + avg).nextAll().removeClass('ratings_vote');
+        $(widget).find('.total_votes').text(votes + ' votes recorded (' + exact + ' rating)');
+    }
+//--></script>
+{{ footer }}
+
+

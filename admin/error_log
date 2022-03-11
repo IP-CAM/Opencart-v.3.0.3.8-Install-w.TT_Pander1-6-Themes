@@ -1,0 +1,71 @@
+[07-Aug-2021 09:32:58 UTC] PHP Fatal error:  Uncaught Exception: Error: Unknown column 'bulk_special' in 'where clause'<br />Error No: 1054<br />DELETE FROM oc_product_special WHERE product_id = '45853' AND customer_group_id = '1' AND bulk_special = 1 in /home/kayrarug/public_html/system/library/db/mysqli.php:40
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(45): DB\MySQLi->query('DELETE FROM oc_...')
+#1 /home/kayrarug/public_html/admin/model/bulk_special/bulk_special.php(36): DB->query('DELETE FROM oc_...')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-_home_kayrarug_storagekayrarug_modification_system_engine_loader.php(248): ModelBulkSpecialBulkSpecial->addSpecial(Array)
+#3 /home/kayrarug/public_html/system/engine/proxy.php(47): Loader->{closure}(Array, Array)
+#4 /home/kayrarug/public_html/admin/controller/extension/module/bulk_special.php(53): Proxy->__call('addSpecial', Array)
+#5 /home/kayrarug/public_html/vqmod/vqcache/vq2-_home_kayrarug_storagekayrarug_modification_system_engine_action.php(79): ControllerExtensionModuleBulkSpec in /home/kayrarug/public_html/system/library/db/mysqli.php on line 40
+[20-Oct-2021 19:56:33 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kayrarug/public_html/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#1 /home/kayrarug/public_html/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-system_startup.php(104): require_once('/home/kayrarug/...')
+#3 /home/kayrarug/public_html/admin/index.php(23): start('admin')
+#4 {main}
+  thrown in /home/kayrarug/public_html/system/library/db/mysqli.php on line 10
+[20-Oct-2021 19:56:33 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kayrarug/public_html/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#1 /home/kayrarug/public_html/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-system_startup.php(104): require_once('/home/kayrarug/...')
+#3 /home/kayrarug/public_html/admin/index.php(23): start('admin')
+#4 {main}
+  thrown in /home/kayrarug/public_html/system/library/db/mysqli.php on line 10
+[20-Oct-2021 19:56:34 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kayrarug/public_html/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#1 /home/kayrarug/public_html/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-system_startup.php(104): require_once('/home/kayrarug/...')
+#3 /home/kayrarug/public_html/admin/index.php(23): start('admin')
+#4 {main}
+  thrown in /home/kayrarug/public_html/system/library/db/mysqli.php on line 10
+[20-Oct-2021 19:56:34 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kayrarug/public_html/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#1 /home/kayrarug/public_html/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-system_startup.php(104): require_once('/home/kayrarug/...')
+#3 /home/kayrarug/public_html/admin/index.php(23): start('admin')
+#4 {main}
+  thrown in /home/kayrarug/public_html/system/library/db/mysqli.php on line 10
+[20-Oct-2021 19:56:35 UTC] PHP Fatal error:  Uncaught Exception: Error: <br />Error No:  in /home/kayrarug/public_html/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#1 /home/kayrarug/public_html/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'kayrarug_kayra_...', 'Kayra2020++', 'kayrarug_kayra_...', '3306')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-system_startup.php(104): require_once('/home/kayrarug/...')
+#3 /home/kayrarug/public_html/admin/index.php(23): start('admin')
+#4 {main}
+  thrown in /home/kayrarug/public_html/system/library/db/mysqli.php on line 10
+[31-Oct-2021 12:24:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:04 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:05 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:05 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:05 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:05 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[31-Oct-2021 12:24:05 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 72 bytes) in /home/kayrarug/public_html/vqmod/vqmod.php on line 336
+[19-Feb-2022 09:32:07 UTC] PHP Fatal error:  Uncaught Exception: Error: Duplicate entry '68-3' for key 'PRIMARY'<br />Error No: 1062<br />INSERT INTO oc_category_description SET category_id = '68', language_id = '3', name = 'KILIM RUGS', description = '', meta_title = 'KILIM RUGS', meta_description = '', meta_keyword = '' in /home/kayrarug/public_html/system/library/db/mysqli.php:40
+Stack trace:
+#0 /home/kayrarug/public_html/system/library/db.php(45): DB\MySQLi->query('INSERT INTO oc_...')
+#1 /home/kayrarug/storagekayrarug/modification/admin/model/localisation/language.php(40): DB->query('INSERT INTO oc_...')
+#2 /home/kayrarug/public_html/vqmod/vqcache/vq2-_home_kayrarug_storagekayrarug_modification_system_engine_loader.php(248): ModelLocalisationLanguage->addLanguage(Array)
+#3 /home/kayrarug/public_html/system/engine/proxy.php(47): Loader->{closure}(Array, Array)
+#4 /home/kayrarug/public_html/admin/controller/localisation/language.php(23): Proxy->__call('addLanguage', Array)
+#5 /home/kayrarug/public_html/vqmod/vqcache/vq2-_home_kayrarug_storagekayrarug in /home/kayrarug/public_html/system/library/db/mysqli.php on line 40

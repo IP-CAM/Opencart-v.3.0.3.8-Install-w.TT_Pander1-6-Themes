@@ -1,0 +1,313 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-testimonial" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+        </div>
+        <div class="panel-body">
+            <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-testimonial" class="form-horizontal">
+                
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+                    <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
+                    <li><a href="#tab-store" data-toggle="tab">{{ tab_store }}</a></li>
+                    <li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active in" id="tab-general">
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-name">{{ entry_contact_name }}</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="contact_name" value="{{ testimonial.contact_name is defined ? testimonial.contact_name : '' }}" placeholder="{{ entry_contact_name }}" id="input-name" class="form-control" />
+                                {% if error_contact_name is defined and error_contact_name is not null %}
+                                    <div class="text-danger">{{ error_contact_name }}</div>
+                                {% endif %}
+                                {% if error_contact_name_str is defined and error_contact_name_str is not null %}
+                                    <div class="text-danger">{{ error_contact_name_str }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-email">{{ entry_contact_email }}</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="contact_email" value="{{ testimonial.contact_email is defined ? testimonial.contact_email : '' }}" placeholder="{{ entry_contact_email }}" id="input-email" class="form-control" />
+                                <!-- {{ error_email_validate ? error_email_validate : '' }} -->
+                                {% if error_email_validate_var is defined and error_email_validate_var is not null %}
+                                    <div class="text-danger">{{ error_email_validate_var }}</div>
+                                {% endif %}
+                                {% if email_duplicate_error_var is defined and email_duplicate_error_var is not null %}
+                                    <div class="text-danger">{{ email_duplicate_error_var }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-identifier">{{ entry_identifier }}</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="identifier" value="{{ testimonial.identifier is defined ? testimonial.identifier : '' }}" placeholder="{{ entry_identifier }}" id="input-identifier" class="form-control" />
+                            {% if text_duplicate_error_var is defined and text_duplicate_error_var is not null %}
+                                <div class="text-danger">{{ text_duplicate_error_var }}</div>
+                            {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-company">{{ entry_contact_company }}</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="contact_company" value="{{ testimonial.contact_company is defined ? testimonial.contact_company : '' }}" placeholder="{{ entry_contact_company }}" id="input-company" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-webiste">
+                            <span data-toggle="tooltip" title="{{ note_url_format }}">{{ entry_website }}</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="contact_website" value="{{ testimonial.contact_website is defined ? testimonial.contact_website : '' }}" placeholder="{{ entry_website }}" id="input-website" class="form-control" />
+                                {% if error_url_validate_var is defined and error_url_validate_var is not null %}
+                                    <div class="text-danger">{{ error_url_validate_var }}</div>
+                                {% endif %}
+                                {% if url_duplicate_error_var is defined and url_duplicate_error_var is not null %}
+                                    <div class="text-danger">{{ url_duplicate_error_var }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-status">{{ entry_curr_status }}</label>
+                            <div class="col-sm-9">
+                            <select name="curr_status" id="input-status" class="form-control">
+                            {% if testimonial.curr_status == 1 %}
+                            <option value="1" selected="selected">{{ text_enabled }}</option>
+                            <option value="0">{{ text_disabled }}</option>
+                            {% else %}
+                            <option value="1">{{ text_enabled }}</option>
+                            <option value="0" selected="selected">{{ text_disabled }}</option>
+                            {% endif %}
+                            </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="input-sort-order">
+                            <span data-toggle="tooltip" title="{{ note_numeric_values }}">{{ entry_sort_order }}</span>
+                            </label>
+                            <div class="col-sm-9">
+                            <input type="text" name="sort_order" value="{{ testimonial.sort_order is defined ? testimonial.sort_order : '' }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+                            {% if error_int_validate_var is defined and error_int_validate_var is not null %}
+                                <div class="text-danger">{{ error_int_validate_var }}</div>
+                            {% endif %}
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="short_description">
+                            <span data-toggle="tooltip" title="{{ note_min_length }}">{{ entry_short_desc }}</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <textarea name="short_desc" placeholder="{{ entry_short_desc }}" id="short_description" data-toggle="summernote" class="form-control">{{ testimonial.short_desc is defined ? testimonial.short_desc : '' }}</textarea>
+                                {% if error_limit_reached_var is defined and error_limit_reached_var is not null %}
+                                    <div class="text-danger">{{ error_limit_reached_var }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="description">
+                            {{ entry_testimonial_desc }}
+                            </label>
+                            <div class="col-sm-9">
+                                <textarea name="testimonial_desc" placeholder="{{ entry_testimonial_desc }}" id="description" data-toggle="summernote" class="form-control">{{ testimonial.testimonial_desc is defined ? testimonial.testimonial_desc : '' }}</textarea>
+                                {% if error_description is defined and error_description is not null %}
+                                    <div class="text-danger">{{ error_description }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label class="col-sm-3 control-label" for="rating">
+                            {{ rating_text }}
+                            </label>
+                            <div class="col-sm-9">
+                                {{ bad_text }}&nbsp;&nbsp;
+                                  <input type="radio" name="rating" value="1" style="background: #c7d487;" {{ (dec_avg is not empty and dec_avg == 1) ? 'checked': '' }} />
+                                  &nbsp;
+                                  <input type="radio" name="rating" value="2" style="background: #c7d487;" {{ (dec_avg is not empty and dec_avg == 2) ? 'checked': '' }} />
+                                  &nbsp;
+                                  <input type="radio" name="rating" value="3" style="background: #c7d487;" {{ (dec_avg is not empty and dec_avg == 3) ? 'checked': '' }} />
+                                  &nbsp;
+                                  <input type="radio" name="rating" value="4" style="background: #c7d487;" {{ (dec_avg is not empty and dec_avg == 4) ? 'checked': '' }} />
+                                  &nbsp;
+                                  <input type="radio" id="rating" name="rating" value="5" style="background: #c7d487;" {{ (dec_avg is not empty and dec_avg == 5) ? 'checked': '' }} />&nbsp;&nbsp;
+                                {{ good_text }}
+                                {% if error_rating_validate_var is defined and error_rating_validate_var is not null %}
+                                    <div class="text-danger">{{ error_rating_validate_var }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-seo">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="input-meta-title">{{ entry_meta_title }}</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="meta_title" value="{{ seo.meta_title is defined ? seo.meta_title : '' }}" placeholder="{{ entry_meta_title }}" id="input-meta-title" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="meta-description">
+                            {{ entry_meta_desc }}
+                            </label>
+                            <div class="col-sm-9">
+                            <textarea name="meta_desc" rows="7" placeholder="{{ entry_meta_desc }}" id="meta-description" class="form-control">{{ seo.meta_desc is defined ? seo.meta_desc : '' }}</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="meta-keywords">
+                            {{ entry_meta_keywords }}
+                            </label>
+                            <div class="col-sm-9">
+                            <textarea name="meta_keywords" rows="7" placeholder="{{ entry_meta_keywords }}" id="meta-keywords" class="form-control">{{ seo.meta_keywords is defined ? seo.meta_keywords : '' }}</textarea>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-store">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{ entry_avatar }}</label>
+                            <div class="col-sm-9"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                              <input type="hidden" name="avatar" value="{{ avatar }}" id="input-image" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">{{ entry_store }}</label>
+                            <div class="col-sm-9">
+                            <div class="well well-sm" style="height: 150px; overflow: auto;">
+                            <div class="checkbox">
+                            <label>
+                            {% if 0 in testimonials_store|keys %}
+                            <input type="checkbox" name="testimonials_store[]" value="0" checked="checked" />
+                            {{ text_default }}
+                            {% else %}
+                            <input type="checkbox" name="testimonials_store[]" value="0" />
+                            {{ text_default }}
+                            {% endif %}
+                            </label>
+                            </div>
+                            {% for store in stores %}
+                            <div class="checkbox">
+                            <label>
+                            {% if store.store_id in testimonials_store|keys %}
+                            <input type="checkbox" name="testimonials_store[]" value="{{ store.store_id }}" checked="checked" />
+                            {{ store.name }}
+                            {% else %}
+                            <input type="checkbox" name="testimonials_store[]" value="{{ store.store_id }}" />
+                            {{ store.name }}
+                            {% endif %}
+                            </label>
+                            </div>
+                            {% endfor %}
+                            </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-design">
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                    <td class="text-left">{{ entry_store }}</td>
+                                    <td class="text-left">{{ entry_layout }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">{{ text_default }}</td>
+                                        <td class="text-left"><select name="module_layout[0][layout_id]" class="form-control">
+                                            <option value=""></option>
+                                            {% for layout in layouts %}
+                                                {% if module_layout[0] is defined and module_layout[0] == layout.layout_id %}
+                                                    <option value="{{ layout.layout_id }}" selected="selected">{{ layout.name }}</option>
+                                                {% else %}
+                                                    <option value="{{ layout.layout_id }}">{{ layout.name }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select></td>
+                                    </tr>
+                                    {% for store in stores %}
+                                        <tr>
+                                            <td class="text-left">{{ store.name }}</td>
+                                            <td class="text-left"><select name="product_layout[{{ store.store_id }}]" class="form-control">
+                                            <option value=""></option>
+                                            {% for layout in layouts %}
+                                            {% if product_layout[store.store_id] is defined and product_layout[store.store_id] == layout.layout_id %}
+                                            <option value="{{ layout.layout_id }}" selected="selected">{{ layout.name }}</option>
+                                            {% else %}
+                                            <option value="{{ layout.layout_id }}">{{ layout.name }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </select></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+<link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script> 
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script> 
+<script type="text/javascript"><!--
+    $(document).ready(function(){
+
+        $('#short_description').summernote({
+            height: 300
+        });
+
+        $('#description').summernote({
+            height: 300
+        });
+
+    });
+//--></script>
+{{ footer }}
+
+
+
+

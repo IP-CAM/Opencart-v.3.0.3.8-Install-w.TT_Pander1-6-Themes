@@ -1,0 +1,17 @@
+/config.php 
+/admin/config.php 
+
+vqmod/vqcache/*
+
+image/cache/*
+!image/cache/index.html
+
+system/storage/cache/*
+!system/storage/cache/index.html
+
+system/storage/logs/*
+!system/storage/logs/index.html
+
+system/storage/session/*
+!system/storage/session/index.html
+!system/storage/session/.htaccess

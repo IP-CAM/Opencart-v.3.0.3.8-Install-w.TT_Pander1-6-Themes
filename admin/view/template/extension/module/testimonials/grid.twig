@@ -1,0 +1,271 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+      <div class="container-fluid">
+        <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+          <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-testimonials').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        </div>
+        <h1>{{ heading_title }}</h1>
+        <ul class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+    
+    <div class="container-fluid">
+        {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+        {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        {% endif %}
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="well">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="control-label" for="input-contact-name">{{ column_contact_name }}</label>
+                      <input type="text" name="filter_contact_name" value="{{ filter_contact_name }}" placeholder="{{ column_contact_name }}" id="input-contact-name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="input-email">{{ column_contact_email }}</label>
+                      <input type="text" name="filter_contact_email" value="{{ filter_contact_email }}" placeholder="{{ column_contact_email }}" id="input-email" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="control-label" for="input-company">{{ column_contact_company }}</label>
+                      <input type="text" name="filter_contact_company" value="{{ filter_contact_company }}" placeholder="{{ column_contact_company }}" id="input-company" class="form-control" />
+                    </div>
+                    
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label class="control-label" for="input-status">{{ column_status }}</label>
+                      <select name="filter_status" id="input-status" class="form-control">
+                        <option value="*"></option>
+                        {% if filter_status is defined and filter_status == 1 %}
+                            <option value="1" selected="selected">{{ text_enabled }}</option>
+                            <option value="0">{{ text_disabled }}</option>
+                        {% else %}
+                            <option value="0" selected="selected">{{ text_disabled }}</option>
+                            <option value="1">{{ text_enabled }}</option>
+                        {% endif %}
+                      </select>
+                    </div>
+                    <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-search"></i> {{ button_filter }}</button>
+                  </div>
+                </div>
+            </div>
+            <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-testimonials">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                                
+                                <td class="center">{{ column_image }}</td>
+                                
+                                <td class="text-left">
+                                    {% if sort == 't.contact_name' %}
+                                        <a href="{{ sort_contact_name }}" class="{{ order|lower }}">{{ column_contact_name }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_contact_name }}">{{ column_contact_name }}</a>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-left">
+                                    {% if sort == 't.contact_email' %}
+                                        <a href="{{ sort_contact_email }}" class="{{ order|lower }}">{{ column_contact_email }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_contact_email }}">{{ column_contact_email }}</a>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-left">
+                                    {% if sort == 't.contact_company' %}
+                                        <a href="{{ sort_contact_company }}" class="{{ order|lower }}">{{ column_contact_company }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_contact_company }}">{{ column_contact_company }}</a>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-left">{{ column_short_desc }}</td>
+                                
+                                <td class="text-left">
+                                    {% if sort == 't.sort_order' %}
+                                        <a href="{{ sort_order }}" class="{{ order|lower }}">{{ column_sort_order }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_order }}">{{ column_sort_order }}</a>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-left">
+                                    {% if sort == 't.curr_status' %}
+                                        <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
+                                    {% else %}
+                                        <a href="{{ sort_status }}">{{ column_status }}</a>
+                                    {% endif %}
+                                </td>
+                                
+                                <td class="text-right">{{ column_action }}</td>
+                                
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {% if testimonials %}
+                            {% for row in testimonials %}
+                                <tr>
+                                    <td class="text-center">
+                                        {% if row.testimonials_id in selected|keys %}
+                                            <input type="checkbox" name="selected[]" value="{{ row.testimonials_id }}" checked="checked" />
+                                        {% else %}
+                                            <input type="checkbox" name="selected[]" value="{{ row.testimonials_id }}" />
+                                        {% endif %}
+                                    <td class="text-center">
+                                        {% if row.avatar %}
+                                            <img src="{{ row.avatar }}"" alt="{{ row.contact_name }}" class="img-thumbnail" />
+                                        {% else %}
+                                            <span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-left">{{ row.contact_name }}</td>
+                                    <td class="text-left">{{ row.contact_email }}</td>
+                                    <td class="text-left">{{ row.contact_company }}</td>
+                                    <td class="text-left">{{ row.short_desc }}</td>
+                                    <td class="text-left">{{ row.sort_order }}</td>
+                                    <td class="text-right">{{ row.curr_status }}</td>
+                                    <td class="text-right"><a href="{{ row.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td class="text-center" colspan="9">{{ text_no_results }}</td>
+                                </tr>
+                            {% endif %}
+                      </tbody>
+                        
+                    </table>
+                </div>
+            </form>
+            <div class="row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right">{{ pageresults }}</div>
+         </div>
+        </div>
+    </div>
+    
+</div>
+<script type="text/javascript"><!--
+    $('#button-filter').on('click', function() {
+        url = 'index.php?route=extension/module/testimonials/testimonials&user_token={{ user_token }}';
+
+        var filter_contact_name = $('input[name=\'filter_contact_name\']').prop('value');
+
+        if (filter_contact_name) {
+            url += '&filter_contact_name=' + encodeURIComponent(filter_contact_name);
+        }
+
+        var filter_contact_email = $('input[name=\'filter_contact_email\']').prop('value');
+
+        if (filter_contact_email) {
+            url += '&filter_contact_email=' + encodeURIComponent(filter_contact_email);
+        }
+
+        var filter_contact_company = $('input[name=\'filter_contact_company\']').prop('value');
+
+        if (filter_contact_company) {
+            url += '&filter_contact_company=' + encodeURIComponent(filter_contact_company);
+        }
+
+        var filter_status = $('select[name=\'filter_status\']').prop('value');
+
+        if (filter_status != '*') {
+            url += '&filter_status=' + encodeURIComponent(filter_status);
+        }
+
+        location = url;
+    });
+//--></script> 
+<script type="text/javascript"><!--
+$('#form-testimonials input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            filter();
+        }
+    });
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_contact_name\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=extension/module/testimonials/testimonials/autocomplete&user_token={{ user_token }}&filter_contact_name=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['contact_name'],
+						value: item['testimonials_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_contact_name\']').val(item['label']);
+	}
+});
+
+$('input[name=\'filter_contact_email\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=extension/module/testimonials/testimonials/autocomplete&user_token={{ user_token }}&filter_contact_email=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['contact_email'],
+						value: item['testimonials_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_contact_email\']').val(item['label']);
+	}
+});
+
+$('input[name=\'filter_contact_company\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=extension/module/testimonials/testimonials/autocomplete&user_token={{ user_token }}&filter_contact_company=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['contact_company'],
+						value: item['testimonials_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_contact_company\']').val(item['label']);
+	}
+});
+//--></script> 
+{{ footer }}
+

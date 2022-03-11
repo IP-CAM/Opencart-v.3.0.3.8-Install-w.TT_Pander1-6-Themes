@@ -1,0 +1,145 @@
+{{ header }} {{ column_left }}
+<div id="content"><link type="text/css" href="view/stylesheet/stylesheet2.css" rel="stylesheet" media="screen" />
+<div class="breadcrumb">
+  {% for breadcrumb in breadcrumbs %}
+  {{ breadcrumb.separator }} <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }} </a>
+   {% endfor %}
+</div>
+{% if error_warning %}
+<div class="warning">{{ error_warning }} </div>
+{% endif %}
+{% if success %}
+<div class="success">{{ success }} </div>
+{% endif %}
+<div class="box">
+  <div class="heading">
+    <h1><img src="view/image/module.png" alt="" /> {{ heading_title }} </h1>
+	<div class="buttons"><a onclick="$('#form').submit();" class="button">{{ button_save }} </a><a onclick="location = '{{ cancel }}';" class="button">{{ button_cancel }} </a></div>
+  </div>
+  <div class="content">
+
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+	<ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-data" data-toggle="tab">SEO Yönlendirici</a></li>
+            <li><a href="#tab-auto" data-toggle="tab">Akıllı Yönlendirme Raporları</a></li>
+            <li><a href="#tab-settings" data-toggle="tab">Ayarlar</a></li>
+          </ul>
+	<div class="tab-content">
+	<div class="tab-pane active" id="tab-data">
+	<table id="redirect" class="list">
+        <thead>
+          <tr>
+            <td class="left">Bu Adresi Yönlendir</td>
+            <td class="left">Bu Adrrese Yönlendir</td>
+            <td></td>
+          </tr>
+        </thead>
+        {% set route_row = 0 %}
+        {% for route in redirect %}
+        <tbody id="route-row{{ route_row }}">
+          <tr>
+            <td><input type="text" name="redirect[{{ route_row }} ][title]" value="{{ route.title }}" /></td>
+            <td><input type="text" name="redirect[{{ route_row }} ][url]" value="{{ route.url }}" /></td>
+            <td class="left"><a onclick="$('#route-row{{ route_row }}').remove();" class="button">{{ button_remove }} </a></td>
+          </tr>
+        </tbody>
+        {% set route_row = route_row + 1 %}
+         {% endfor %}
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td class="left"><a onclick="addroute();" class="button">{# echo $button_add_route; #}Yeni Ekle</a></td>
+          </tr>
+        </tfoot>
+      </table>
+		</div>
+	<div class="tab-pane" id="tab-auto">
+			 <table class="list">
+          <thead>
+            <tr>
+              <td class="left">Link</td>
+              <td class="left">Düzeltilmiş Link</td>
+              <td class="left">Tarih</td>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% if pages %}
+            {% for page in pages %}
+            <tr>
+              <td class="left">{{ page.link }} </td>
+              <td class="left">{{ page.fixedlink }} </td>
+              <td class="left">{{ page.date }} </td>
+            </tr>
+			{% endfor %}
+             {% else %}
+            <tr>
+              <td class="center" colspan="8">{{ text_no_results }} </td>
+            </tr>
+             {% endif %}
+          </tbody>
+        </table>
+		 <div class="pagination">{{ pagination }} </div>
+	</div>
+	<div class="tab-pane" id="tab-settings">
+	<table id="module" class="list">
+        <thead>
+          <tr>
+            <td class="left">Özellik</td>
+            <td class="left">Durum</td>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="left">Yönlendirme kuralları eklemenizi sağlayan Yönlendirme Yöneticisi'ni etkinleştirin (Örnek. <b>eskilink.html</b> -> <b>yenilink.html</b> <b>http://opencartuzman.com/eskilink.html</b> buraya yönlenir <b>http://opencartuzman.com/yenilink.html</b>)</td>
+           	<td class="left">
+				{% if redirect_settings.redirectmanager %}
+                <input type="checkbox" name="redirect_settings[redirectmanager]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="redirect_settings[redirectmanager]" value="1" />{% endif %}
+                 </td>
+          </tr>
+		  <tr>
+            <td class="left">Yanlış yazılan URL'yi otomatik olarak yönlendiren Akıllı Otomatik Yönlendirmeyi etkinleştirs (eg. <b>http://opencartuzman.com/aple</b> doğru adrese otomatik yönlenir <b>http://opencartuzman.com/apple</b> if http://yoursiopencartuzman.com/aple yok ise)</td>
+           	<td class="left">
+				{% if redirect_settings.autoredirect %}
+                <input type="checkbox" name="redirect_settings[autoredirect]" value="1" checked="checked" />
+                 {% else %}
+                <input type="checkbox" name="redirect_settings[autoredirect]" value="1" />{% endif %}
+                 </td>
+          </tr>
+
+        </tbody>
+
+
+      </table>
+	</div>
+	</div>
+    </form>
+	<span style="color:red" class="help">*</span>
+  </div>
+</div>
+<script type="text/javascript"><!--
+
+var route_row = {{ route_row }} ;
+
+function addroute() {
+
+	html  = '<tbody id="route-row' + route_row + '">';
+	html += '  <tr>';
+	html += '    <td><input type="text" name="redirect[' + route_row + '][title]" value="" /></td>';
+	html += '    <td><input type="text" name="redirect[' + route_row + '][url]" value="" /></td>';
+	html += '    <td class="left"><a onclick="$(\'#route-row' + route_row + '\').remove();" class="button">{{ button_remove }} </a></td>';
+	html += '  </tr>';
+	html += '</tbody>';
+
+	$('#redirect tfoot').before(html);
+
+	route_row++;
+}
+
+//--></script>
+</script>
+
+{{ footer }}
