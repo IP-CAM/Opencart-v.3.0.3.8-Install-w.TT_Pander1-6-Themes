@@ -56,14 +56,13 @@ class ControllerApiProduct extends Controller
     }
     public function add()
     {
-        $this->load->language('catalog/product');
+        $this->load->language('admin/catalog/product');
 
         $this->document->setTitle($this->language->get('heading_title'));
 
-        $this->load->model('catalog/product');
-
+        $this->load->model('admin/catalog/product');
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-            $this->model_catalog_product->addProduct($this->request->post);
+            $this->model_admin_catalog_product->addProduct($this->request->post);
 
             $this->session->data['success'] = $this->language->get('text_success');
 
@@ -106,7 +105,9 @@ class ControllerApiProduct extends Controller
             $this->response->setOutput(json_encode($json));
         }
 
-        $json = ['message' => $this->error, 'data' => $this->request->post];
+        $json = ['message' => $this->error, 'status' => $this->error ? false : true];
+        if (isset($this->request->post['debug_mod']) && $this->request->post['debug_mod'] == true)
+            $json['data'] = $this->request->post;
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
     }
@@ -117,16 +118,18 @@ class ControllerApiProduct extends Controller
         // 	$this->error['warning'] = $this->language->get('error_permission');
         // }
         if (!isset($this->request->post['product_description'])) {
-            $this->error['product_description'] = "product_description is required feild";
+            $this->error['product_description'] = "product_description[<language_id>][<field>] is required feild";
             return !$this->error;
         }
         foreach ($this->request->post['product_description'] as $language_id => $value) {
-            if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 255)) {
-                $this->error['name'][$language_id] = $this->language->get('error_name');
+            if (!isset($value['name']) || (utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 255)) {
+                $this->error['name'][$language_id] = 'product_description[<language_id>][name] is required field';
+                return !$this->error;
             }
 
-            if ((utf8_strlen($value['meta_title']) < 1) || (utf8_strlen($value['meta_title']) > 255)) {
-                $this->error['meta_title'][$language_id] = $this->language->get('error_meta_title');
+            if (!isset($value['meta_title']) || (utf8_strlen($value['meta_title']) < 1) || (utf8_strlen($value['meta_title']) > 255)) {
+                $this->error['meta_title'][$language_id] = 'product_description[<language_id>][meta_title] is required field';
+                return !$this->error;
             }
         }
 
@@ -139,7 +142,7 @@ class ControllerApiProduct extends Controller
         }
 
         if (!isset($this->request->post['product_seo_url'])) {
-            $this->error['product_seo_url'] = "product_seo_url is required feild";
+            $this->error['product_seo_url'] = "product_seo_url[<index>][<language_id>] is required feild";
             return !$this->error;
         }
         if ($this->request->post['product_seo_url']) {
@@ -152,11 +155,10 @@ class ControllerApiProduct extends Controller
                             $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_unique');
                         }
 
-                        $seo_urls = $this->model_design_seo_url->getSeoUrlsByKeyword($keyword);
-
+                        $seo_urls =  $this->model_admin_design_seo_url->getSeoUrlsByKeyword($keyword);
                         foreach ($seo_urls as $seo_url) {
                             if (($seo_url['store_id'] == $store_id) && (!isset($this->request->get['product_id']) || (($seo_url['query'] != 'product_id=' . $this->request->get['product_id'])))) {
-                                $this->error['keyword'][$store_id][$language_id] = $this->language->get('error_keyword');
+                                $this->error['keyword'][$store_id][$language_id] = 'SEO URL already in use!';
 
                                 break;
                             }
